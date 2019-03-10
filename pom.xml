@@ -12,7 +12,7 @@
     <artifactId>laboratory</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>laboratory</name>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <description>laboratory program</description>
 
     <properties>
@@ -22,6 +22,7 @@
     <modules>
         <module>common</module>
         <module>advanced-redis</module>
+        <module>framework</module>
     </modules>
 
 
