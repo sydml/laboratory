@@ -10,6 +10,6 @@ import com.sydml.framework.annotation.Controller;
 @Controller
 public class UserController {
 
-    @Autowired("userService2")
+    @Autowired("userServiceB")
     private IUserService userService;
 }

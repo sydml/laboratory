@@ -7,6 +7,5 @@ import com.sydml.framework.annotation.Service;
  * @date 2019/3/10 0010
  */
 @Service
-public class UserService implements IUserService {
-
+public class UserServiceB implements IUserService {
 }

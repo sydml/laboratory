@@ -35,13 +35,14 @@ public final class IocHelper {
                         if (beanField.isAnnotationPresent(Autowired.class)) {
                             //此处的Autowired注解必须使用类型是实现类，如果是按照接口注入的则此处无法处理
                             Class<?> beanFieldClass = beanField.getType();
+                            Class<?> implementClass;
                             if (beanFieldClass.isInterface()) {
-                                getImplementClass(beanField, beanFieldClass);
-                            }
-                            Object beanFieldInstance = beanMap.get(beanFieldClass);
-                            if (beanFieldInstance != null) {
-                                //DI 反射进行依赖注入
-                                ReflectionUtil.setField(beanInstance, beanField, beanFieldInstance);
+                                implementClass = getImplementClass(beanField, beanFieldClass);
+                                Object beanFieldInstance = beanMap.get(implementClass);
+                                if (beanFieldInstance != null) {
+                                    //DI 反射进行依赖注入
+                                    ReflectionUtil.setField(beanInstance, beanField, beanFieldInstance);
+                                }
                             }
                         }
                     }
@@ -61,7 +62,7 @@ public final class IocHelper {
         //所有实现类
         List<Class<?>> implementClassList = ClassHelper.getClassSet().stream().filter(it -> beanFieldClass.isAssignableFrom(it)).collect(Collectors.toList());
         // 实现类和类名小写的映射
-        Map<Class<?>, String> implementClassNameMap = implementClassList.stream().distinct().collect(Collectors.toMap(Function.identity(), it -> it.getName().toLowerCase()));
+        Map<Class<?>, String> implementClassNameMap = implementClassList.stream().distinct().collect(Collectors.toMap(Function.identity(), it -> it.getSimpleName().toLowerCase()));
         // 优先按照字段上Autowired注解写的名字获取，默认为类名首字母小写
         Annotation[] fieldAnnotations = beanField.getDeclaredAnnotations();
         for (Annotation fieldAnnotation : fieldAnnotations) {
