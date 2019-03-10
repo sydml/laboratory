@@ -53,7 +53,7 @@ public final class ClassHelper {
 
     /**
      * 获取Component类
-     *//*
+     */
     public static Set<Class<?>> getComponentClassSet() {
         Set<Class<?>> classSet = new HashSet<>();
         for (Class<?> cls : CLASS_SET) {
@@ -62,7 +62,7 @@ public final class ClassHelper {
             }
         }
         return classSet;
-    }*/
+    }
 
     /**
      * 获取所有的bean类
@@ -72,7 +72,7 @@ public final class ClassHelper {
         Set<Class<?>> beanClassSet = new HashSet<>();
         beanClassSet.addAll(getControllerClassSet());
         beanClassSet.addAll(getServiceClassSet());
-//        beanClassSet.addAll(getComponentClassSet());
+        beanClassSet.addAll(getComponentClassSet());
         return beanClassSet;
     }
 

@@ -35,10 +35,17 @@ public final class IocHelper {
                         if (beanField.isAnnotationPresent(Autowired.class)) {
                             //此处的Autowired注解必须使用类型是实现类，如果是按照接口注入的则此处无法处理
                             Class<?> beanFieldClass = beanField.getType();
-                            Class<?> implementClass;
+                            // 支持接口多实现
                             if (beanFieldClass.isInterface()) {
-                                implementClass = getImplementClass(beanField, beanFieldClass);
+                                Class<?> implementClass = getImplementClass(beanField, beanFieldClass);
                                 Object beanFieldInstance = beanMap.get(implementClass);
+                                if (beanFieldInstance != null) {
+                                    //DI 反射进行依赖注入
+                                    ReflectionUtil.setField(beanInstance, beanField, beanFieldInstance);
+                                }
+                            }else{
+                               // 非接口实现类直接注入
+                                Object beanFieldInstance = beanMap.get(beanFieldClass);
                                 if (beanFieldInstance != null) {
                                     //DI 反射进行依赖注入
                                     ReflectionUtil.setField(beanInstance, beanField, beanFieldInstance);
@@ -60,21 +67,23 @@ public final class IocHelper {
     private static Class<?> getImplementClass(Field beanField, Class<?> beanFieldClass) {
 
         //所有实现类
-        List<Class<?>> implementClassList = ClassHelper.getClassSet().stream().filter(it -> beanFieldClass.isAssignableFrom(it)).collect(Collectors.toList());
+        List<Class<?>> implementClassList = ClassHelper.getClassSet().stream().filter(it -> it.isAssignableFrom(beanFieldClass)).collect(Collectors.toList());
+        //如果只有一个实现类,返回实现类
+        if (implementClassList.size() == 2) {
+            return implementClassList.get(0).isInterface() ? implementClassList.get(1) : implementClassList.get(0);
+        }
         // 实现类和类名小写的映射
-        Map<Class<?>, String> implementClassNameMap = implementClassList.stream().distinct().collect(Collectors.toMap(Function.identity(), it -> it.getSimpleName().toLowerCase()));
+//        Map<Class<?>, String> implementClassNameMap = implementClassList.stream().distinct().collect(Collectors.toMap(Function.identity(), it -> it.getSimpleName().toLowerCase()));
+        Map<String, Class<?>> implementClassNameMap = implementClassList.stream().distinct().collect(Collectors.toMap(it -> it.getSimpleName().toLowerCase(), Function.identity()));
+
         // 优先按照字段上Autowired注解写的名字获取，默认为类名首字母小写
         Annotation[] fieldAnnotations = beanField.getDeclaredAnnotations();
+
         for (Annotation fieldAnnotation : fieldAnnotations) {
             if (fieldAnnotation instanceof Autowired) {
                 String autowiredValue = ((Autowired) fieldAnnotation).value();
                 if (StringUtil.isNotEmpty(autowiredValue)) {
-                    for (Map.Entry<Class<?>, String> implementClassEntry : implementClassNameMap.entrySet()) {
-                        if (autowiredValue.toLowerCase().equals(implementClassEntry.getValue())) {
-                            return implementClassEntry.getKey();
-                        }
-
-                    }
+                   return implementClassNameMap.get(autowiredValue.toLowerCase());
                 }
             }
         }
