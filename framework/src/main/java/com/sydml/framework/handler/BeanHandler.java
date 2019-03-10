@@ -1,4 +1,4 @@
-package com.sydml.framework.helper;
+package com.sydml.framework.handler;
 
 import com.sydml.framework.utils.ReflectionUtil;
 
@@ -10,10 +10,10 @@ import java.util.Set;
  * @author Liuym
  * @date 2019/3/10 0010
  */
-public final class BeanHelper {
+public final class BeanHandler {
     private static final Map<Class<?>, Object> BEAN_MAP = new HashMap<>();
     static {
-        Set<Class<?>> beanClassSet = ClassHelper.getBeanClassSet();
+        Set<Class<?>> beanClassSet = ClassHandler.getBeanClassSet();
         for (Class<?> beanClass : beanClassSet) {
             Object obj = ReflectionUtil.newInstance(beanClass);
             BEAN_MAP.put(beanClass, obj);

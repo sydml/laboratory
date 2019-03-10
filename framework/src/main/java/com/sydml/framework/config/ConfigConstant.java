@@ -1,4 +1,4 @@
-package com.sydml.framework.config.helper;
+package com.sydml.framework.config;
 
 /**
  * @author Liuym

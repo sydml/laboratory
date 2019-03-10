@@ -113,7 +113,7 @@ public final class ClassUtil {
     }
 
     public static void main(String[] args) {
-        getJar("com.sydml.framework.lib");
+        getJar("com.sydml.framework.test.lib");
 
     }
 

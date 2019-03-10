@@ -1,6 +1,7 @@
-package com.sydml.framework.config.helper;
+package com.sydml.framework.handler;
 
 import com.sydml.common.utils.PropsUtil;
+import com.sydml.framework.config.ConfigConstant;
 
 import java.util.Properties;
 
@@ -8,7 +9,7 @@ import java.util.Properties;
  * @author Liuym
  * @date 2019/3/10 0010
  */
-public class ConfigHelper {
+public class ConfigHandler {
     private static final Properties CONFIG_PROPS = PropsUtil.loadProps(ConfigConstant.CONFIG_FILE);
 
     public static String getJdbcDriver() {
