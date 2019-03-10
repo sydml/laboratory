@@ -23,3 +23,7 @@
 
 5. ElasticSearch 只做简单demo
 
+6. 重写了framework
+ - IOC 容器支持接口多实现注入
+ - 增加了@Primary,@Order 解决接口多个实现类问题
+
