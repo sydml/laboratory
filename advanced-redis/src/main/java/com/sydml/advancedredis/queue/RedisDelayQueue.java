@@ -44,6 +44,7 @@ public class RedisDelayQueue<T> implements IRedisDelayQueue<T> {
         }
     }
 
+    @Override
     public RedisMessage<T> getMessage(String queueKey) {
         RedisMessage<T> message = new RedisMessage<>();
         Jedis jedis = null;
