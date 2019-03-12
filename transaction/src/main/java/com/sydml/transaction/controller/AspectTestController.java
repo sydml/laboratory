@@ -20,7 +20,7 @@ public class AspectTestController {
     @RequestMapping(value = "/say", method = RequestMethod.GET)
     @ResponseBody
     @Permission
-    public void say(@RequestParam(value="name") String name,@RequestParam(value="content") String content, HttpServletResponse response) throws IOException {
+    public void say(@RequestParam(value="name") String name,@RequestParam(value="content") String content) throws IOException {
         System.out.println(name+ ":"  + content);
     }
 

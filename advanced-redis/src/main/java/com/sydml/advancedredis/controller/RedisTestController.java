@@ -40,7 +40,6 @@ public class RedisTestController {
     @GetMapping("/batch-send-message")
     public void batchSendMessage(){
         for (int i = 0; i < 10; i++) {
-
             redisDelayQueue.sendMessage("message", "test" + i);
         }
     }

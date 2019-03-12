@@ -31,6 +31,7 @@ public class PermissionAspect {
     public void doBefore(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
+        String name = joinPoint.getTarget().getClass().getSimpleName();
         Object[] args = joinPoint.getArgs();
         Parameter[] parameters = method.getParameters();
         for (Parameter parameter : parameters) {
