@@ -38,6 +38,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      *              若想使用这个key  只需要讲注解上keyGenerator的值设置为keyGenerator即可</br>
      * @return 自定义策略生成的key
      */
+    @Override
     @Bean
     public KeyGenerator keyGenerator() {
         return new KeyGenerator(){
@@ -54,6 +55,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         };
     }
     //缓存管理器
+    @Override
     @Bean
     public CacheManager cacheManager() {
         RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager
