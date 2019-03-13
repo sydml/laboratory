@@ -50,12 +50,12 @@ public final class AopHandler {
     public static Map<Class<?>, Set<Class<?>>> createProxyMap() throws Exception {
         Map<Class<?>, Set<Class<?>>> proxyMap = new HashMap<>();
         addAspectProxy(proxyMap);
-        addTransctionProxy(proxyMap);
+        addTransactionProxy(proxyMap);
 
         return proxyMap;
     }
 
-    private static void addTransctionProxy(Map<Class<?>, Set<Class<?>>> proxyMap) {
+    private static void addTransactionProxy(Map<Class<?>, Set<Class<?>>> proxyMap) {
         Set<Class<?>> serviceClassSet = ClassHandler.getClassSetByAnnotation(Service.class);
         proxyMap.put(TransactionProxy.class, serviceClassSet);
     }
