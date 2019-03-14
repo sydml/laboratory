@@ -1,5 +1,6 @@
 package com.sydml.transaction.api;
 
+import com.sydml.transaction.domain.User1;
 import com.sydml.transaction.domain.User2;
 
 import java.util.List;
@@ -16,4 +17,8 @@ public interface IUser2Service {
     void saveUserWithTrx(User2 user2);
 
     User2 saveUserWithoutTrx(User2 user2);
+
+    User1 saveUser2AndUser1(User2 user2);
+
+    void testBaseTypeRequest(String a, int b, Boolean c, Long d, User1 user1);
 }

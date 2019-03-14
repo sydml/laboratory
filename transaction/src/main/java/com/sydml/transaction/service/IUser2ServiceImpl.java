@@ -6,6 +6,7 @@ import com.sydml.transaction.domain.User1;
 import com.sydml.transaction.domain.User2;
 import com.sydml.transaction.repository.User1Repository;
 import com.sydml.transaction.repository.User2Repository;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -30,6 +31,9 @@ public class IUser2ServiceImpl implements IUser2Service,ApplicationContextAware 
 
     private ApplicationContext applicationContext;
 
+    @Autowired
+    private User1Repository user1Repository;
+
     @Override
     @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRES_NEW)
     public void save(User2 user) {
@@ -53,7 +57,7 @@ public class IUser2ServiceImpl implements IUser2Service,ApplicationContextAware 
     @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
     public void saveUserWithTrx(User2 user2){
         IUser2ServiceImpl user2Service = applicationContext.getBean(IUser2ServiceImpl.class);
-        user2Service.saveUser2(user2);
+        user2Service.saveUser2AndUser1(user2);
         throw new RuntimeException("trx error");
     }
 
@@ -61,14 +65,24 @@ public class IUser2ServiceImpl implements IUser2Service,ApplicationContextAware 
     @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
     @PrintLog(type = PrintLog.OR)
     public User2 saveUserWithoutTrx(User2 user2){
-        User2 user = saveUser2(user2);
+        IUser2ServiceImpl user2Service = applicationContext.getBean(IUser2ServiceImpl.class);
+        User1 user = saveUser2AndUser1(user2);
 //        int i = 1 / 0;
-        return user;
+        return user2;
     }
 
+    @PrintLog(type = PrintLog.OR)
+    @Override
+    public User1 saveUser2AndUser1(User2 user2) {
+        User1 user1 = new User1();
+        user1.setName(user2.getName());
+       return user1Repository.save(user1);
+    }
 
-    public User2 saveUser2(User2 user2) {
-       return user2Repository.save(user2);
+    @Override
+    @PrintLog(type = PrintLog.OR)
+    public void testBaseTypeRequest(String a, int b, Boolean c, Long d, User1 user1) {
+        user1Repository.save(user1);
     }
 
 }

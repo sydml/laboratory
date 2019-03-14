@@ -56,7 +56,7 @@ public class PrintLogAspect {
                 if (parameters[i].getType().isPrimitive() || isWrapClass(parameters[i].getType())) {
                     logContent.append(MARKS + parameters[i].getName() + MARKS + SPLIT + MARKS + args[i] + MARKS + COMMA);
                 } else {
-                    logContent.append(JsonUtil.encodeJson(args[i]));
+                    logContent.append(args[i].getClass().getSimpleName()+ SPLIT +JsonUtil.encodeJson(args[i]));
                 }
             }
             String content = logContent.toString();

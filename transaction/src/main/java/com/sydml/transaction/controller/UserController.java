@@ -2,6 +2,7 @@ package com.sydml.transaction.controller;
 
 import com.sydml.transaction.api.IUser1Service;
 import com.sydml.transaction.api.IUser2Service;
+import com.sydml.transaction.domain.User1;
 import com.sydml.transaction.domain.User2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,5 +52,13 @@ public class UserController {
         User2 user2 = new User2();
         user2.setName("new");
         user2Service.save(user2);
+    }
+
+    @RequestMapping("/test")
+    @ResponseBody
+    public void testRequest() {
+        User1 user1 = new User1();
+        user1.setName("testRequest");
+        user2Service.testBaseTypeRequest("a", 1, true, 2L, user1);
     }
 }
