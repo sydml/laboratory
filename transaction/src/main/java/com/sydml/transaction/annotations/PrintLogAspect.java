@@ -35,7 +35,8 @@ public class PrintLogAspect {
 
 
     @Pointcut("@annotation(com.sydml.transaction.annotations.PrintLog)")
-    public void controllerAspect() {}
+    public void controllerAspect() {
+    }
 
     @Before("controllerAspect()")
     public void doBefore(JoinPoint joinPoint) {
@@ -79,9 +80,7 @@ public class PrintLogAspect {
             String className = target.getClass().getSimpleName();
             String methodName = method.getName();
             logContent.append(className + POINT + methodName + POINT + RESULT_IS + SPLIT);
-            if (result != null) {
-                logContent.append(JsonUtil.encodeJson(result));
-            }
+            logContent.append(JsonUtil.encodeJson(result));
             String content = logContent.toString();
             logProcessor(PrintLog.RESPONSE, method, content);
         } catch (Exception e) {

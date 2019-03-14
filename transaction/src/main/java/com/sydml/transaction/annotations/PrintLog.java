@@ -6,6 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 控制调用接口时，对输入参数和输出结果的日志打印
+ *
  * @author Liuym
  * @date 2019/3/14 0014
  */
