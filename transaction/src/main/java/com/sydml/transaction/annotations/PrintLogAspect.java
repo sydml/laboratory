@@ -48,17 +48,18 @@ public class PrintLogAspect {
             Object target = joinPoint.getTarget();
             String className = target.getClass().getSimpleName();
             Parameter[] parameters = method.getParameters();
-            logContent.append(className + POINT + method.getName() + POINT + PARAM_IS + SPLIT);
+            logContent.append(className + POINT + method.getName() + POINT + PARAM_IS + SPLIT +"{");
             if (args.length == 0) {
                 return;
             }
             for (int i = 0; i < parameters.length; i++) {
-                if (parameters[i].getType().isPrimitive() || isWrapClass(parameters[i].getType())) {
+                if (parameters[i].getType().isPrimitive() || isWrapClass(parameters[i].getType()) || parameters[i].getType() == String.class) {
                     logContent.append(MARKS + parameters[i].getName() + MARKS + SPLIT + MARKS + args[i] + MARKS + COMMA);
                 } else {
                     logContent.append(args[i].getClass().getSimpleName()+ SPLIT +JsonUtil.encodeJson(args[i]));
                 }
             }
+            logContent.append("}");
             String content = logContent.toString();
             logProcessor(PrintLog.REQUEST, method, content);
         } catch (Exception e) {
@@ -129,6 +130,8 @@ public class PrintLogAspect {
         System.out.println(int.class.isPrimitive());
         System.out.println(isWrapClass(Integer.class));
         System.out.println(isWrapClass(Boolean.class));
+        System.out.println(isWrapClass(String.class));
         System.out.println(isWrapClass(User1.class));
+        System.out.println(String.class);
     }
 }
