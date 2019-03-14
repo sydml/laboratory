@@ -15,5 +15,5 @@ public interface IUser2Service {
 
     void saveUserWithTrx(User2 user2);
 
-    void saveUserWithoutTrx(User2 user2);
+    User2 saveUserWithoutTrx(User2 user2);
 }

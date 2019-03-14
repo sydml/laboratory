@@ -42,4 +42,14 @@ public class UserController {
         user2.setName("non-trx");
         user2Service.saveUserWithoutTrx(user2);
     }
+
+    @RequestMapping("/save")
+    @ResponseBody
+    public void saveUser() {
+//        User1 user1 = new User1();
+//        user1.setName("aa");
+        User2 user2 = new User2();
+        user2.setName("new");
+        user2Service.save(user2);
+    }
 }

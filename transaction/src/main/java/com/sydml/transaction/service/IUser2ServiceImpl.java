@@ -1,5 +1,6 @@
 package com.sydml.transaction.service;
 
+import com.sydml.transaction.annotations.PrintLog;
 import com.sydml.transaction.api.IUser2Service;
 import com.sydml.transaction.domain.User1;
 import com.sydml.transaction.domain.User2;
@@ -30,7 +31,7 @@ public class IUser2ServiceImpl implements IUser2Service,ApplicationContextAware 
     private ApplicationContext applicationContext;
 
     @Override
-    @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
+    @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRES_NEW)
     public void save(User2 user) {
         user2Repository.save(user);
     }
@@ -52,15 +53,22 @@ public class IUser2ServiceImpl implements IUser2Service,ApplicationContextAware 
     @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
     public void saveUserWithTrx(User2 user2){
         IUser2ServiceImpl user2Service = applicationContext.getBean(IUser2ServiceImpl.class);
-        user2Service.save(user2);
+        user2Service.saveUser2(user2);
         throw new RuntimeException("trx error");
     }
 
     @Override
     @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
-    public void saveUserWithoutTrx(User2 user2){
-        save(user2);
-        throw new RuntimeException("non trx error");
+    @PrintLog(type = PrintLog.OR)
+    public User2 saveUserWithoutTrx(User2 user2){
+        User2 user = saveUser2(user2);
+//        int i = 1 / 0;
+        return user;
+    }
+
+
+    public User2 saveUser2(User2 user2) {
+       return user2Repository.save(user2);
     }
 
 }
