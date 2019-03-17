@@ -6,7 +6,6 @@ import com.sydml.transaction.domain.User1;
 import com.sydml.transaction.domain.User2;
 import com.sydml.transaction.repository.User1Repository;
 import com.sydml.transaction.repository.User2Repository;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -65,17 +64,20 @@ public class IUser2ServiceImpl implements IUser2Service,ApplicationContextAware 
     @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
     @PrintLog(type = PrintLog.OR)
     public User2 saveUserWithoutTrx(User2 user2){
-        IUser2ServiceImpl user2Service = applicationContext.getBean(IUser2ServiceImpl.class);
+        User1 user1 = new User1();
+        user1.setName("user1WithOutTrx");
+        user1Repository.save(user1);
         User1 user = saveUser2AndUser1(user2);
+        IUser2ServiceImpl user2Service = applicationContext.getBean(IUser2ServiceImpl.class);
 //        int i = 1 / 0;
         return user2;
     }
 
     @PrintLog(type = PrintLog.OR)
-    @Override
-    public User1 saveUser2AndUser1(User2 user2) {
+//    @Override
+    private User1 saveUser2AndUser1(User2 user2) {
         User1 user1 = new User1();
-        user1.setName(user2.getName());
+        user1.setName("saveUser2AndUser1");
        return user1Repository.save(user1);
     }
 
