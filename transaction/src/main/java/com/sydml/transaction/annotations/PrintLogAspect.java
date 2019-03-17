@@ -1,5 +1,7 @@
 package com.sydml.transaction.annotations;
 
+import com.alibaba.druid.support.json.JSONUtils;
+import com.alibaba.fastjson.JSON;
 import com.sydml.common.utils.JsonUtil;
 import com.sydml.transaction.domain.User1;
 import org.aspectj.lang.JoinPoint;
@@ -14,6 +16,8 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Liuym
@@ -130,5 +134,12 @@ public class PrintLogAspect {
         System.out.println(isWrapClass(Integer.class));
         System.out.println(isWrapClass(Boolean.class));
         System.out.println(isWrapClass(User1.class));
+        Object o = new Object();
+        List<Object> objects = new ArrayList<>();
+        objects.add(o);
+        String s1 = JSON.toJSONString(objects);
+        String s = JsonUtil.encodeJson(objects);
+        System.out.println(s);
     }
+
 }
