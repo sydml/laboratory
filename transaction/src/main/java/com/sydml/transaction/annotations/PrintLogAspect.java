@@ -5,10 +5,8 @@ import com.alibaba.fastjson.JSON;
 import com.sydml.common.utils.JsonUtil;
 import com.sydml.transaction.domain.User1;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,6 +66,16 @@ public class PrintLogAspect {
             logProcessor(PrintLog.REQUEST, method, content);
         } catch (Exception e) {
             LOGGER.warn("PrintLogAspect.processor.request.log.print.error");
+        }
+    }
+
+    @Around("controllerAspect()")
+    public void doAround(ProceedingJoinPoint pjb) {
+        Object[] args1 = pjb.getArgs();
+        try {
+            Object proceed = pjb.proceed();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
         }
     }
 
