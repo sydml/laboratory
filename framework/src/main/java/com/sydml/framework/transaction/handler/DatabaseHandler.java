@@ -27,11 +27,11 @@ public class DatabaseHandler {
     private static final BasicDataSource DATA_SOURCE;
 
     static {
-        Properties conf = PropsUtil.loadProps("config.properties");
-        DRIVER = conf.getProperty("jdbc.driver");
-        URL = conf.getProperty("jdbc.url");
-        USERNAME = conf.getProperty("jdbc.username");
-        PASSWORD = conf.getProperty("jdbc.password");
+        Properties conf = PropsUtil.loadProps("framework.properties");
+        DRIVER = conf.getProperty("framework.jdbc.driver");
+        URL = conf.getProperty("framework.jdbc.url");
+        USERNAME = conf.getProperty("framework.jdbc.username");
+        PASSWORD = conf.getProperty("framework.jdbc.password");
 
         DATA_SOURCE = new BasicDataSource();
         DATA_SOURCE.setDriverClassName(DRIVER);

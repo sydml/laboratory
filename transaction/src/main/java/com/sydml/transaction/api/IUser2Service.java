@@ -21,4 +21,5 @@ public interface IUser2Service {
 //    User1 saveUser2AndUser1(User2 user2);
 
     void testBaseTypeRequest(String a, int b, Boolean c, Long d, User1 user1);
+    void test1();
 }

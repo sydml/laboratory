@@ -21,6 +21,8 @@ public class ArticleContentController {
     private ArticleContentMapper articleContentMapper;
     @GetMapping
     public List<Map<String,Object>> getAll(){
+        long id = Thread.currentThread().getId();
+        System.out.println("getAll:" + id);
         List<Map<String,Object>> hashMap = articleContentMapper.selectAll();
         return  hashMap;
     }

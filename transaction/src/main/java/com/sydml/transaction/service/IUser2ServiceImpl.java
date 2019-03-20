@@ -87,4 +87,9 @@ public class IUser2ServiceImpl implements IUser2Service,ApplicationContextAware 
         user1Repository.save(user1);
     }
 
+    @Override
+    public void test1(){
+        long id = Thread.currentThread().getId();
+        System.out.println("service.test1:"+id);
+    }
 }
