@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sydml.mybatis.dao.UserMapper">
+  <select id="selectAll" resultType="sydml.mybatis.base.ResultMap">
+    select * from user;
+  </select>
+</mapper>

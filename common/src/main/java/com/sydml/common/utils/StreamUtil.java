@@ -27,6 +27,7 @@ public final class StreamUtil {
             String line;
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
+                sb.append("\r\n");
             }
         } catch (Exception e) {
             LOGGER.error("StreamUtil get String failure",e);
