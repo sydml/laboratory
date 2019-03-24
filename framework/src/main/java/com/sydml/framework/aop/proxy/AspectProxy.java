@@ -13,6 +13,12 @@ import java.lang.reflect.Method;
 public abstract class AspectProxy implements Proxy {
     private static final Logger LOGGER = LoggerFactory.getLogger(AspectProxy.class);
 
+    /**
+     * 代理目标对象执行代替执行method
+     * @param proxyChain
+     * @return
+     * @throws Throwable
+     */
     @Override
     public Object doProxy(ProxyChain proxyChain) throws Throwable {
         Object result;

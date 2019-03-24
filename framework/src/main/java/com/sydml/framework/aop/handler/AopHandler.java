@@ -34,12 +34,12 @@ public final class AopHandler {
                 BeanHandler.setBean(targetClass, proxy);
             }
         } catch (Exception e) {
-            LOGGER.error("aop failure,e");
+            LOGGER.error("aop failure", e);
         }
     }
 
     private static Set<Class<?>> createTargetClassSet(Aspect aspect) throws Exception {
-        Set<Class<?>> targetClassSet = new HashSet<>();
+        Set<Class<?>> targetClassSet = new HashSet<Class<?>>();
         Class<? extends Annotation> annotation = aspect.value();
         if (annotation != null && !annotation.equals(Aspect.class)) {
             targetClassSet.addAll(ClassHandler.getClassSetByAnnotation(annotation));
@@ -47,19 +47,35 @@ public final class AopHandler {
         return targetClassSet;
     }
 
-    public static Map<Class<?>, Set<Class<?>>> createProxyMap() throws Exception {
-        Map<Class<?>, Set<Class<?>>> proxyMap = new HashMap<>();
+    private static Map<Class<?>,Set<Class<?>>> createProxyMap() throws Exception {
+        Map<Class<?>, Set<Class<?>>> proxyMap = new HashMap<Class<?>, Set<Class<?>>>();
         addAspectProxy(proxyMap);
         addTransactionProxy(proxyMap);
-
         return proxyMap;
     }
 
-    private static void addTransactionProxy(Map<Class<?>, Set<Class<?>>> proxyMap) {
-        Set<Class<?>> serviceClassSet = ClassHandler.getClassSetByAnnotation(Service.class);
-        proxyMap.put(TransactionProxy.class, serviceClassSet);
+    private static Map<Class<?>, List<Proxy>> createTargetMap(Map<Class<?>, Set<Class<?>>> proxyMap) throws Exception{
+        Map<Class<?>, List<Proxy>> targetMap = new HashMap<Class<?>, List<Proxy>>();
+        for (Map.Entry<Class<?>, Set<Class<?>>> proxyEntity : proxyMap.entrySet()) {
+            Class<?> proxyClass = proxyEntity.getKey();
+            Set<Class<?>> targetClassSet = proxyEntity.getValue();
+            for (Class<?> targetClass : targetClassSet) {
+                Proxy proxy = (Proxy) proxyClass.newInstance();
+                if (targetMap.containsKey(targetClass)) {
+                    targetMap.get(targetClass).add(proxy);
+                }else{
+                    List<Proxy> proxyList = new ArrayList<Proxy>();
+                    proxyList.add(proxy);
+                    targetMap.put(targetClass, proxyList);
+                }
+            }
+        }
+        return targetMap;
     }
 
+    /**
+     * 添加事务机制
+     */
     private static void addAspectProxy(Map<Class<?>, Set<Class<?>>> proxyMap) throws Exception {
         Set<Class<?>> proxyClassSet = ClassHandler.getClassSetBySuper(AspectProxy.class);
         for (Class<?> proxyClass : proxyClassSet) {
@@ -71,23 +87,9 @@ public final class AopHandler {
         }
     }
 
-    public static Map<Class<?>, List<Proxy>> createTargetMap(Map<Class<?>, Set<Class<?>>> proxyMap) throws Exception {
-
-        Map<Class<?>, List<Proxy>> targetMap = new HashMap<>();
-        for (Map.Entry<Class<?>, Set<Class<?>>> proxyEntity : proxyMap.entrySet()) {
-            Class<?> proxyClass = proxyEntity.getKey();
-            Set<Class<?>> targetClassSet = proxyEntity.getValue();
-            Proxy proxy = (Proxy) proxyClass.newInstance();
-            for (Class<?> targetClass : targetClassSet) {
-                if (targetMap.containsKey(targetClass)) {
-                    targetMap.get(targetClass).add(proxy);
-                } else {
-                    List<Proxy> proxyList = new ArrayList<>();
-                    proxyList.add(proxy);
-                    targetMap.put(targetClass, proxyList);
-                }
-            }
-        }
-        return targetMap;
+    private static void addTransactionProxy(Map<Class<?>, Set<Class<?>>> proxyMap) {
+        Set<Class<?>> serviceClassSet = ClassHandler.getClassSetByAnnotation(Service.class);
+        proxyMap.put(TransactionProxy.class, serviceClassSet);
     }
+
 }

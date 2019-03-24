@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * @date 2019/3/10 0010
  */
 public final class ClassHandler {
-    private static final Set<Class<?>> CLASS_SET;
+    public static  Set<Class<?>> CLASS_SET;
 
     static{
         String basePackage = ConfigHandler.getBasePackages();
@@ -86,10 +86,10 @@ public final class ClassHandler {
     public static Class<?> getImplementClass(Field beanField, Class<?> beanFieldClass) {
 
         //所有实现类
-        List<Class<?>> implementClassList = ClassHandler.getClassSet().stream().filter(it -> it.isAssignableFrom(beanFieldClass)).collect(Collectors.toList());
+        List<Class<?>> implementClassList = ClassHandler.getClassSet().stream().filter(it -> beanFieldClass.isAssignableFrom(it) && !beanFieldClass.equals(it)).collect(Collectors.toList());
         //如果只有一个实现类,返回实现类
-        if (implementClassList.size() == 2) {
-            return implementClassList.get(0).isInterface() ? implementClassList.get(1) : implementClassList.get(0);
+        if (implementClassList.size() == 1) {
+            return implementClassList.get(0);
         }
         // 实现类和类名小写的映射
 //        Map<Class<?>, String> implementClassNameMap = implementClassList.stream().distinct().collect(Collectors.toMap(Function.identity(), it -> it.getSimpleName().toLowerCase()));

@@ -1,6 +1,7 @@
 package com.sydml.framework.ioc.bean;
 
 import com.sydml.common.utils.CastUtil;
+import com.sydml.common.utils.CollectionUtil;
 
 import java.util.Map;
 
@@ -30,5 +31,9 @@ public class Param {
      */
     public Map<String, Object> getParamMap() {
         return paramMap;
+    }
+
+    public boolean isEmpty(){
+        return CollectionUtil.isEmpty(paramMap);
     }
 }

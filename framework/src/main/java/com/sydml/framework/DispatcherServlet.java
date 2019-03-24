@@ -1,6 +1,7 @@
 package com.sydml.framework;
 
 import com.sydml.common.utils.*;
+import com.sydml.framework.ioc.annotation.ResponseBody;
 import com.sydml.framework.ioc.bean.Data;
 import com.sydml.framework.ioc.bean.Param;
 import com.sydml.framework.ioc.bean.View;
@@ -79,8 +80,14 @@ public class DispatcherServlet extends HttpServlet {
             }
             Param param = new Param(paramMap);
             Method actionMethod = handler.getActionMethod();
-            Object result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
+            Object result;
+            if (param.isEmpty()) {
+                result = ReflectionUtil.invokeMethod(controllerBean, actionMethod);
+            }else {
+                result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
+            }
             if(result instanceof View){
+                // 如果返回结果是View类型的进行视图跳转
                 View view = (View) result;
                 String path = view.getPath();
                 if (StringUtil.isNotEmpty(path)) {
@@ -95,18 +102,25 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 }
             }else if(result instanceof Data){
+                // 如果返回结果是Data类型的直接通过流返回json
                 Data data = (Data) result;
                 Object model = data.getModel();
                 if (model != null) {
-                    response.setContentType("UTF-8");
-                    PrintWriter writer = response.getWriter();
-                    String json = JsonUtil.encodeJson(model);
-                    writer.write(json);
-                    writer.flush();
-                    writer.close();
+                    printResult(response, model);
                 }
+            }else if (actionMethod.isAnnotationPresent(ResponseBody.class)) {
+                printResult(response, result);
             }
 
         }
+    }
+
+    private void printResult(HttpServletResponse response, Object result) throws IOException {
+        response.setContentType("UTF-8");
+        PrintWriter writer = response.getWriter();
+        String json = JsonUtil.encodeJson(result);
+        writer.write(json);
+        writer.flush();
+        writer.close();
     }
 }

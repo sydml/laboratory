@@ -7,13 +7,9 @@ import java.lang.annotation.Target;
 
 /**
  * @author Liuym
- * @date 2019/3/10 0010
+ * @date 2019/3/24 0024
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RequestMapping {
-    /**
-     * 请求路径
-     */
-    String value();
+public @interface ResponseBody {
 }
