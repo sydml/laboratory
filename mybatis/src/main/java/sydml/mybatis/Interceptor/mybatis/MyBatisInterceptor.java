@@ -18,6 +18,7 @@ import java.sql.Statement;
 import java.util.Properties;
 
 /**
+ * 统计sql时间
  * @author Liuym
  * @date 2019/3/23 0023
  */
