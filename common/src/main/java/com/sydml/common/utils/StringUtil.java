@@ -11,6 +11,8 @@ public final class StringUtil {
 
     public static final String SEPARATOR = String.valueOf((char) 29);
 
+    private static final String UNDERLINE = "_";
+
     /**
      * 判断字符串是否为空
      */
@@ -31,5 +33,23 @@ public final class StringUtil {
 
     public static String[] splitString(String body, String regex) {
         return body.split(regex);
+    }
+
+    public static String underlineToCamel(String key) {
+        if (StringUtil.isEmpty(key)) {
+            return null;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+
+        if (key.contains(UNDERLINE)) {
+            String[] split = key.split(UNDERLINE);
+            for (String s : split) {
+                stringBuilder.append(s.substring(0, 1).toUpperCase()).append(s.substring(1));
+            }
+        }else{
+            stringBuilder.append(key);
+        }
+        String result = stringBuilder.replace(0, 1, stringBuilder.substring(0, 1).toLowerCase()).toString();
+        return result;
     }
 }
