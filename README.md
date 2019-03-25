@@ -33,4 +33,9 @@
  - 增加了@Primary,@Order 解决接口多个实现类问题
  - 增加@ResponseBody注解
  - 目前存在问题：测试该框架时，IOC 容器初始化时，如果项目域名与框架域名不一致，则IOC容器为空，需要调试IOC 初始化路径问题
+ 
+七. Web项目Authorization 鉴权token方式简单实现redis存储，Interceptor实现类获取并鉴权
+ ##### 对于Interceptor实现类后续增加处理方案
+ - todo 指定拦截：可以增加注解的方式，根据注解拦截需要授权的接口
+ - todo 统一处理返回结果：可以根据是否授权在这里直接写入返回结果到response中
 

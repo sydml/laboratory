@@ -1,4 +1,4 @@
-package com.sydml.transaction.platform;
+package com.sydml.authorization.platform;
 
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
