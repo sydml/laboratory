@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sydml</groupId>
-	<artifactId>token</artifactId>
+	<artifactId>authorization</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>authorization</name>
-	<description>token-authentication-example</description>
+	<description>authentication-example</description>
 
 	<properties>
 		<java.version>1.8</java.version>
