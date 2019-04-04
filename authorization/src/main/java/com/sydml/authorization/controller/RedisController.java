@@ -33,4 +33,6 @@ public class RedisController {
         Object execute = redisTemplate.execute(redisScript, list, "60");
         System.out.println();
     }
+
+
 }

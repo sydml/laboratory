@@ -41,4 +41,7 @@
  ##### 对于Interceptor实现类后续增加处理方案
  - todo 指定拦截：可以增加注解的方式，根据注解拦截需要授权的接口
  - todo 统一处理返回结果：可以根据是否授权在这里直接写入返回结果到response中
-
+ ##### springboot 定时任务使用 ScheduledService
+ - 配置AsyncConfig支持多线程异步定时任务执行
+ - ScheduledService 需要在类上开启@EnableScheduling
+    * 同时每个任务方法上加入@Scheduled定时类型，@Async 开启支持异步
