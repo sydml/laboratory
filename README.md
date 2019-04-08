@@ -48,10 +48,12 @@
     * 不支持动态修改cron
     * 不支持动态修改任务
 ##### 更强的com.sydml.authorization.platform.job.DynamicTask类
- - 支持动态增加任务，动态修改cron
+ - 支持动态增加任务,停止任务，动态修改cron
  - scheduledMap 内存中存放任务，根据指定key停止定时任务
  
-##### DynamicCronScheduled
+##### com.sydml.authorization.platform.job.DynamicScheduled
+- 支持动态增加任务,停止任务，动态修改cron
+- 反射获取scheduledTasks,进行增加,停止和删除任务
 
 ##### 增加动态注入Bean类 com.sydml.authorization.platform.spring.DynamicBeanAware
  - getBeanFactory获取beanFactory

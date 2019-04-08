@@ -13,17 +13,17 @@ import java.util.List;
  * @author Liuym
  * @date 2019/3/20 0020
  */
-public class CRUD {
+public class DBRepository {
     /**
      * update
      * @param sql
      * @param params
      */
     public static void update(String sql,List<Object> params) {
-        PreparedStatement st = null;
+        PreparedStatement st;
         ResultSet rs = null;
         DatabaseHandler.beginTransaction();
-        Connection connection=null;
+        Connection connection;
         try {
             connection = DatabaseHandler.getConnection();
             st = connection.prepareStatement(sql);
