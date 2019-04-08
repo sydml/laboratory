@@ -45,3 +45,7 @@
  - 配置AsyncConfig支持多线程异步定时任务执行
  - ScheduledService 需要在类上开启@EnableScheduling
     * 同时每个任务方法上加入@Scheduled定时类型，@Async 开启支持异步
+    * 不支持动态修改cron
+    * 不支持动态修改任务
+##### 更强的com.sydml.authorization.platform.job.DynamicTask类
+ - 支持动态增加任务，动态修改cron

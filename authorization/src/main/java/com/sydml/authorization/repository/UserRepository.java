@@ -1,7 +1,7 @@
 package com.sydml.authorization.repository;
 
 import com.sydml.authorization.domain.User;
-import com.sydml.authorization.platform.JpaPartitionRepository;
+import com.sydml.authorization.platform.data.JpaPartitionRepository;
 
 import java.util.List;
 

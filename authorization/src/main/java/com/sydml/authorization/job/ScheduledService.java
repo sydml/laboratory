@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @EnableScheduling
 public class ScheduledService {
 
-    @Scheduled(cron = "0/5 * * * * *")
+    /*@Scheduled(cron = "0/5 * * * * *")
     @Async
     public void scheduled(){
         try {
@@ -30,12 +30,7 @@ public class ScheduledService {
     @Scheduled(cron = "${jobs.cron}")
     @Async
     public void configCron(){
-        try {
-            Thread.sleep(10000000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("=====>>>>>使用cron "+System.currentTimeMillis());
+        System.out.println("=====>>>>>使用环境变量cron "+System.currentTimeMillis());
     }
 
 
@@ -48,5 +43,5 @@ public class ScheduledService {
     @Async
     public void scheduled2() {
         System.out.println("=====>>>>>fixedDelay " + System.currentTimeMillis());
-    }
+    }*/
 }

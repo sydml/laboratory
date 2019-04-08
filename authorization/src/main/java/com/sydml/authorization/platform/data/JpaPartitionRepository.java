@@ -1,4 +1,4 @@
-package com.sydml.authorization.platform;
+package com.sydml.authorization.platform.data;
 
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
