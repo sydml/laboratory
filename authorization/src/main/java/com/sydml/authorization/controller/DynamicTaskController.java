@@ -23,8 +23,7 @@ public class DynamicTaskController {
     @GetMapping("set-cron")
     public void setCron(String cron) {
         DynamicJob job = new DynamicJob("job-0");
-        dynamicCronScheduled.setTask(job);
-        dynamicCronScheduled.setCron(cron);
+        dynamicCronScheduled.addTask(job,cron);
     }
 
     @RequestMapping("start")
