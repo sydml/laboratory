@@ -49,3 +49,7 @@
     * 不支持动态修改任务
 ##### 更强的com.sydml.authorization.platform.job.DynamicTask类
  - 支持动态增加任务，动态修改cron
+##### 增加动态注入Bean类 com.sydml.authorization.platform.spring.DynamicBeanAware
+ - getBeanFactory获取beanFactory
+ - autowareSingletonBean 动态注入bean,单利模式
+ - autoPrototypeBean 动态注入bean，多例模式
