@@ -67,8 +67,9 @@ public class DynamicBeanAware implements ApplicationContextAware {
     }
 
     /**
+     * 非是单例模式的
      * 根据obj的类型、创建一个新的bean、添加到Spring容器中
-     * 非是单例模式的，可以有重复的bean，取值的时只能通过obj.getClass().getName()获得Bean而不能通过类型获得Bean
+     * 可以有重复的bean，取值的时只能通过obj.getClass().getName()获得Bean而不能通过类型获得Bean
      * @param object
      */
     public void autoPrototypeBean(Object object) {
