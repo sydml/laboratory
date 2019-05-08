@@ -38,7 +38,6 @@ public class BeanListHandler implements ResultSetHandler {
                     field.set(bean, value);
                 }
                 list.add(bean);
-
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

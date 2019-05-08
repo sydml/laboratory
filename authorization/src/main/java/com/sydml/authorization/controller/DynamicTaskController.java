@@ -1,6 +1,6 @@
 package com.sydml.authorization.controller;
 
-import com.sydml.authorization.job.DynamicCronScheduled;
+import com.sydml.authorization.platform.job.DynamicScheduled;
 import com.sydml.authorization.job.domain.DynamicJob;
 import com.sydml.authorization.platform.job.DynamicTask;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("dynamic-scheduled")
 public class DynamicTaskController {
     @Autowired
-    private DynamicCronScheduled dynamicCronScheduled;
+    private DynamicScheduled dynamicScheduled;
 
     @Autowired
     private DynamicTask dynamicTask;
     @GetMapping("set-cron")
     public void setCron(String cron) {
         DynamicJob job = new DynamicJob("job-0");
-        dynamicCronScheduled.addTask(job,cron);
+        dynamicScheduled.addTask(job,cron);
     }
+
+    @GetMapping("stop-cron")
+    public void stopTask() {
+        dynamicScheduled.stopTask("job-0");
+    }
+
 
     @RequestMapping("start")
     public void startDynamicJob(String cron) {

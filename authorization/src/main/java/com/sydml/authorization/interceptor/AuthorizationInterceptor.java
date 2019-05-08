@@ -14,6 +14,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 /**
  * @author Liuym
@@ -60,6 +61,11 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
             UserDTO userDTO = JsonUtil.decodeJson(o.toString(), UserDTO.class);
             UserDTO user = userService.findByUsername(userDTO.getUsername());
             result = user != null ? true : false;
+        }
+        if (!result) {
+            PrintWriter writer = response.getWriter();
+            writer.write("login.error");
+            response.setStatus(403);
         }
         return result;
     }
