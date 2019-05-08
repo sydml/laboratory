@@ -2,7 +2,6 @@ package com.sydml.authorization.util.excel;
 
 import com.opencsv.CSVReader;
 import com.sydml.common.utils.JsonUtil;
-import com.sydml.common.utils.StreamUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -214,18 +213,38 @@ public class ExcelReader {
 
     public static void main(String[] args) throws IOException {
         ExcelReader reader = new ExcelReader();
-        InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("excel/5月份工作.xlsx");
-        List<Map<Integer, String>> result = reader.parse("5月份工作.xlsx", resourceAsStream, -1);
+        InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("excel/Orange-report-26-03-2019.xlsx");
+        List<Map<Integer, String>> result = reader.parse("Orange-report-26-03-2019.xlsx", resourceAsStream, 0);
         ExportExcel exportExcel = new ExportExcel();
         Map<Integer, String> map = result.get(0);
         Map<String, String> head = new HashMap<>();
         for (Map.Entry<Integer, String> integerStringEntry : map.entrySet()) {
             head.put(integerStringEntry.getKey().toString(), integerStringEntry.getValue());
         }
+        result.remove(0);
 
         HSSFWorkbook workbook = exportExcel.mapToExcel(head, result, "ceshi");
 //        OutputStream outputStream = new FileOutputStream(new File());
 //        workbook.write(outputStream);
+
+        FileOutputStream fos = null;
+        BufferedOutputStream bufos = null;
+        File dir = new File("E:\\test");
+        File destFile = new File(dir,"test.xls");
+        try{
+            fos = new FileOutputStream(destFile);
+            bufos = new BufferedOutputStream(fos);
+            workbook.write(bufos);
+            bufos.flush();
+        }finally{
+            if(bufos!=null){
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    throw new RuntimeException("关闭失败");
+                }
+            }
+        }
         System.out.println();
     }
 }

@@ -1,5 +1,6 @@
 package com.sydml.authorization.util.excel;
 
+import com.sydml.common.utils.CastUtil;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -142,8 +143,7 @@ public class ExportExcel {
                     //表头信息
                     cell.setCellValue(property.getValue());
                 } else {
-                    cell.setCellValue(contents.get(i - 1).get(property.getKey()) == null ? null : contents.get(i - 1).get(property.getKey
-                            ()).toString());
+                    cell.setCellValue(contents.get(i - 1).get(CastUtil.castInt(property.getKey())) == null ? null : contents.get(i - 1).get(CastUtil.castInt(property.getKey())).toString());
                 }
             }
         }
