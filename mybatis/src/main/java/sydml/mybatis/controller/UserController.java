@@ -3,6 +3,8 @@ package sydml.mybatis.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sydml.common.api.dto.LoginInfo;
+import com.sydml.common.api.dto.UserDTO;
 import com.sydml.common.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,9 +12,8 @@ import sydml.mybatis.base.ResultMap;
 import sydml.mybatis.dao.UserMapper;
 import sydml.mybatis.dto.RequestInfo;
 import sydml.mybatis.dto.User;
+import sydml.mybatis.service.IUserLoginService;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,9 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private IUserLoginService loginServie;
 
     @GetMapping
     public List<ResultMap> getAll() {
@@ -66,5 +70,29 @@ public class UserController {
         map.put("message", "登录成功，欢迎使用");
         map.put("data", null);
         return JsonUtil.encodeJson(map);
+    }
+
+    @PostMapping("login")
+    public void login(@RequestBody(required = true) LoginInfo loginInfo) {
+        loginServie.login(loginInfo);
+    }
+
+    @PostMapping("save")
+    public void save(@RequestBody(required = true) UserDTO userDTO) {
+        loginServie.save(userDTO);
+    }
+
+    @GetMapping("find-by-username")
+    @ResponseBody
+    public UserDTO findByUsername(@RequestParam(value = "username") String username) {
+        UserDTO userDTO = loginServie.findByUsername(username);
+        return userDTO;
+    }
+
+    @GetMapping("find-by-id")
+    @ResponseBody
+    public UserDTO findById(@RequestParam(value="id") Long id) {
+        UserDTO userDTO = loginServie.findById(id);
+        return userDTO;
     }
 }

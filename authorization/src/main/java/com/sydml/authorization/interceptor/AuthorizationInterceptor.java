@@ -1,7 +1,7 @@
 package com.sydml.authorization.interceptor;
 
 import com.sydml.common.utils.JsonUtil;
-import com.sydml.authorization.dto.UserDTO;
+import com.sydml.common.api.dto.UserDTO;
 import com.sydml.authorization.service.IUserService;
 import com.sydml.authorization.service.UserService;
 import com.sydml.common.utils.StringUtil;
@@ -42,7 +42,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        String username = request.getHeader(TOKEN);
+        /*String username = request.getHeader(TOKEN);
         if (redisTemplate == null) {
             BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
             redisTemplate = (RedisTemplate) factory.getBean("redisTemplate");
@@ -66,7 +66,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
             PrintWriter writer = response.getWriter();
             writer.write("login.error");
             response.setStatus(403);
-        }
-        return result;
+        }*/
+        return true;
     }
 }

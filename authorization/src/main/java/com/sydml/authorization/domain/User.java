@@ -1,6 +1,6 @@
 package com.sydml.authorization.domain;
 
-import com.sydml.authorization.base.Status;
+import com.sydml.common.basebean.enums.Status;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

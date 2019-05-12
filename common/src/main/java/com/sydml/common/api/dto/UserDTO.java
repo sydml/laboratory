@@ -1,6 +1,6 @@
-package com.sydml.authorization.dto;
+package com.sydml.common.api.dto;
 
-import com.sydml.authorization.base.Status;
+import com.sydml.common.basebean.enums.Status;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

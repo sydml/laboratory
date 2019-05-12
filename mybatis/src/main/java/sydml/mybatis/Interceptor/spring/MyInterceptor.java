@@ -29,19 +29,14 @@ public class MyInterceptor implements HandlerInterceptor{
         // 从这里获取Myfilter 中设置在ParameterRequestWrapper 的另个一参数进行校验，根据校验结果填写response
         //todo 感觉完全不需要开发ParameterRequestWrapper 去处理这些验证步骤，直接在request配置token 验证token即可，不用绕来绕去
         //todo 作者之所以这么做是否要为了避免request 请求有敏感信息，需要查询验证，不暴露在外面，那直接给我token 我在此处查询也可以啊
-        System.out.println("preHandle");
-       /* String token = request.getHeader("token");
-        if ("asdf".equals(token)) {
+        /*System.out.println("preHandle");
+        String token = request.getHeader("token");
+        if ("ming".equals(token)) {
             return true;
         }else{
             return writeFailResponse(response);
         }*/
-        String test = request.getParameter("test");
-        if ("new Test params".equals(test)) {
-            return true;
-        }else{
-            return writeFailResponse(response);
-        }
+        return true;
     }
 
     private boolean writeFailResponse(HttpServletResponse response) throws IOException{

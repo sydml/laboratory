@@ -1,15 +1,19 @@
 package com.sydml.authorization.service;
 
-import com.sydml.authorization.dto.UserDTO;
+import com.sydml.common.api.dto.UserDTO;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Liuym
  * @date 2019/3/25 0025
  */
 public interface IUserService {
-    UserDTO findByUsername(String username);
+
+    UserDTO findByUsername(@RequestParam(value="username") String username);
 
     UserDTO save(UserDTO userDTO);
 
-    UserDTO findById(Long id);
+    UserDTO findById(@RequestParam(value="id") Long id);
 }

@@ -1,11 +1,13 @@
 package com.sydml.authorization.service;
 
 import com.sydml.authorization.domain.User;
-import com.sydml.authorization.dto.UserDTO;
+import com.sydml.common.api.dto.UserDTO;
 import com.sydml.authorization.repository.UserRepository;
 import com.sydml.authorization.util.BeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @author Liuym
@@ -22,6 +24,7 @@ public class UserService implements IUserService{
 
 
     @Override
+//    @RequestMapping(value="user/find-by-username",method = RequestMethod.GET)
     public UserDTO findByUsername(String username) {
         return beanMapper.map(userRepository.findByUsername(username).get(0), UserDTO.class);
     }
@@ -33,7 +36,7 @@ public class UserService implements IUserService{
 
     @Override
     public UserDTO findById(Long id) {
-        return beanMapper.map(userRepository.findById(id), UserDTO.class);
+        return beanMapper.map(userRepository.findById(id).orElseGet(null), UserDTO.class);
     }
 
 

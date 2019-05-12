@@ -1,4 +1,4 @@
-package com.sydml.authorization.base;
+package com.sydml.common.basebean.enums;
 
 /**
  * @author Liuym

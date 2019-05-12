@@ -1,4 +1,4 @@
-package com.sydml.authorization.dto;
+package com.sydml.common.api.dto;
 
 /**
  * @author Liuym

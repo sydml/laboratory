@@ -34,11 +34,11 @@ public class Myfilter implements Filter {
         //todo 感觉完全不需要开发ParameterRequestWrapper 去处理这些验证步骤，直接在request配置token 验证token即可，不用绕来绕去
         String token = req.getHeader("token");
         ParameterRequestWrapper requestWrapper = new ParameterRequestWrapper(req);
-        if ("asdf".equals(token)) {
+        /*if ("asdf".equals(token)) {
             User user = userMapper.queryAllPageDetail().get(0);
             Map<String, Object> otherParams = new HashMap<>();
             otherParams.put("test", "new Test params");
-        }
+        }*/
         chain.doFilter(requestWrapper, response);
     }
 
