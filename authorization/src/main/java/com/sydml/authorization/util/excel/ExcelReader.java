@@ -213,8 +213,8 @@ public class ExcelReader {
 
     public static void main(String[] args) throws IOException {
         ExcelReader reader = new ExcelReader();
-        InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("excel/Orange-report-26-03-2019.xlsx");
-        List<Map<Integer, String>> result = reader.parse("Orange-report-26-03-2019.xlsx", resourceAsStream, 0);
+        InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("excel/5月份工作.xlsx");
+        List<Map<Integer, String>> result = reader.parse("5月份工作.xlsx", resourceAsStream, -1);
         ExportExcel exportExcel = new ExportExcel();
         Map<Integer, String> map = result.get(0);
         Map<String, String> head = new HashMap<>();
@@ -230,6 +230,9 @@ public class ExcelReader {
         FileOutputStream fos = null;
         BufferedOutputStream bufos = null;
         File dir = new File("E:\\test");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
         File destFile = new File(dir,"test.xls");
         try{
             fos = new FileOutputStream(destFile);

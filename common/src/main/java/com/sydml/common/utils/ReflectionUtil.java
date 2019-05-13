@@ -5,6 +5,12 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * Created by Yuming-Liu
@@ -72,6 +78,21 @@ public final class ReflectionUtil {
         }
         field.setAccessible(accessible);
         return value;
+    }
+
+    public static List<Field> getFields(Class clazz) {
+        List<Field> result = new ArrayList<>(Arrays.asList(clazz.getDeclaredFields()));
+        Optional.ofNullable(clazz.getSuperclass()).ifPresent(addSuperclassFields(result));
+        return result;
+    }
+
+    private static Consumer<Class> addSuperclassFields(List<Field> result) {
+        return superClass -> {
+            List<Field> superclassFields = getFields(superClass);
+            List<String> resultNames = result.stream().map(Field::getName).collect(Collectors.toList());
+            List<Field> validSuperclassFields = superclassFields.stream().filter(superclassField -> !resultNames.contains(superclassField.getName())).collect(Collectors.toList());
+            result.addAll(validSuperclassFields);
+        };
     }
 
     public static Field getField(Class<?> clazz, String name) {

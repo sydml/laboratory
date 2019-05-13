@@ -13,6 +13,10 @@ public final class StringUtil {
 
     private static final String UNDERLINE = "_";
 
+    private static final String SET = "set";
+
+    private static final String GET = "get";
+
     /**
      * 判断字符串是否为空
      */
@@ -51,5 +55,15 @@ public final class StringUtil {
         }
         String result = stringBuilder.replace(0, 1, stringBuilder.substring(0, 1).toLowerCase()).toString();
         return result;
+    }
+
+    public static String getSetMethodName(String fieldName) {
+        String fieldFirst = fieldName.substring(0, 1).toUpperCase();
+        return SET + fieldFirst + fieldName.substring(1, fieldName.length());
+    }
+
+    public static String getGetMethodName(String fieldName) {
+        String fieldFirst = fieldName.substring(0, 1).toUpperCase();
+        return GET + fieldFirst + fieldName.substring(1, fieldName.length());
     }
 }
