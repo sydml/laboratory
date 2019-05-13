@@ -1,4 +1,4 @@
-package com.sydml.transaction.data;
+package com.sydml.transaction.platform.data;
 
 import com.sydml.common.utils.Nullable;
 import com.sydml.common.utils.StringUtil;
@@ -17,7 +17,7 @@ public final class CommonQueryConditionExecutor {
         //do nothing
     }
 
-    public static <T> Page<T> queryByCondition(PageCondition condition, JpaSpecificationExecutor<T> specificationExecutor, TypeReference<T> domainTypeReference) {
+    public static <T> Page<T> queryByCondition(PageCondition condition, JpaSpecificationExecutor<T> specificationExecutor) {
         Specification<T> specification = SpecificationBuilder.buildSpecification(condition);
         if (condition.getPage() != PageCondition.PAGE_DEFAULTVALUE) {
             return StringUtil.isEmpty(condition.getDirection())

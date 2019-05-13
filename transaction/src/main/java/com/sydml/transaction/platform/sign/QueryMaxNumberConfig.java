@@ -1,4 +1,4 @@
-package com.sydml.transaction.data.sign;
+package com.sydml.transaction.platform.sign;
 
 import java.lang.annotation.*;
 

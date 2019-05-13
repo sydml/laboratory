@@ -1,9 +1,9 @@
-package com.sydml.transaction.data;
+package com.sydml.transaction.platform.data;
 
 import com.google.common.collect.Lists;
 import com.sydml.common.utils.ClassUtil;
 import com.sydml.common.utils.Nullable;
-import com.sydml.transaction.data.sign.*;
+import com.sydml.transaction.platform.sign.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

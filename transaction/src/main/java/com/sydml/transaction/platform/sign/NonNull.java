@@ -1,4 +1,4 @@
-package com.sydml.transaction.data.sign;
+package com.sydml.transaction.platform.sign;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -11,5 +11,5 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Ignore {
+public @interface NonNull {
 }

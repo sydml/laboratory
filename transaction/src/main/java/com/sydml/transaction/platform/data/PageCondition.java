@@ -1,11 +1,12 @@
 /**
  *
  */
-package com.sydml.transaction.data;
+package com.sydml.transaction.platform.data;
 
 
-import com.sydml.transaction.data.sign.Ignore;
-import com.sydml.transaction.data.sign.Page;
+import com.sydml.transaction.platform.sign.Ignore;
+import com.sydml.transaction.platform.sign.Page;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.ws.rs.QueryParam;
 
@@ -28,7 +29,7 @@ public class PageCondition extends SortCondition{
      * 查询第几页
      */
     @Page
-    @QueryParam("page")
+//    @QueryParam("page")
     private Integer page = PAGE_DEFAULTVALUE;
     /**
      * 每页显示条数

@@ -1,7 +1,7 @@
-package com.sydml.transaction.data;
+package com.sydml.transaction.platform.data;
 
 
-import com.sydml.transaction.data.sign.Ignore;
+import com.sydml.transaction.platform.sign.Ignore;
 
 public class SortCondition {
 
