@@ -5,6 +5,11 @@ server:
 spring:
   application:
     name: transaction
+  zipkin:
+    base-url: http://localhost:8081
+    sleuth:
+      sampler:
+        probability: 1
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     druid:

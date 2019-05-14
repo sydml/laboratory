@@ -1,0 +1,13 @@
+server:
+  port: 9411
+spring:
+  application:
+    name: zipkin-server
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8100/eureka/
+info: #/info请求的显示信息
+  app:
+    name: SpringCloud2.0版本 ZipKin
+    version: 1.0.0
