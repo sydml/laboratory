@@ -1,13 +1,13 @@
 package com.sydml.transaction.controller;
 
+import com.sydml.common.api.dto.LoginInfo;
 import com.sydml.transaction.api.IUser1Service;
 import com.sydml.transaction.api.IUser2Service;
 import com.sydml.transaction.domain.User1;
 import com.sydml.transaction.domain.User2;
+import com.sydml.transaction.feign.IUserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Liuym
@@ -22,6 +22,9 @@ public class UserController {
 
     @Autowired
     private IUser2Service user2Service;
+
+    @Autowired
+    private IUserLoginService userLoginService;
 
     @RequestMapping("/trx")
     @ResponseBody
@@ -60,5 +63,11 @@ public class UserController {
         User1 user1 = new User1();
         user1.setName("testRequest");
         user2Service.testBaseTypeRequest("a", 1, true, 2L, user1);
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @ResponseBody
+    public void login(@RequestBody(required = true) LoginInfo loginInfo) {
+        userLoginService.login(loginInfo);
     }
 }
