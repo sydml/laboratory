@@ -18,7 +18,7 @@ public final class ReflectionUtil {
         try {
             instance = cls.newInstance();
         } catch (Exception e) {
-           LOGGER.error("ReflectionUtil.newInstance.error.cls:"+ cls.getName());
+            LOGGER.error("ReflectionUtil.newInstance.error.cls:" + cls.getName());
             throw new RuntimeException(e);
         }
         return instance;
@@ -33,7 +33,7 @@ public final class ReflectionUtil {
         try {
             result = method.invoke(obj, args);
         } catch (Exception e) {
-            LOGGER.error("ReflectionUtil.invokeMethod.error.method.is:"+ method.getName());
+            LOGGER.error("ReflectionUtil.invokeMethod.error.method.is:" + method.getName());
             throw new RuntimeException(e);
         }
         return result;
@@ -44,7 +44,7 @@ public final class ReflectionUtil {
         try {
             field.set(obj, value);
         } catch (Exception e) {
-            LOGGER.error("ReflectionUtil.setField.error.obj.is:"+obj+",file.is:"+field.getName());
+            LOGGER.error("ReflectionUtil.setField.error.obj.is:" + obj + ",file.is:" + field.getName());
             throw new RuntimeException(e);
         }
     }

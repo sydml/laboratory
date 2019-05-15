@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 public interface IUserService {
 
-    UserDTO findByUsername(@RequestParam(value="username") String username);
+    UserDTO findByUsername(@RequestParam(value = "username") String username);
 
     UserDTO save(UserDTO userDTO);
 
-    UserDTO findById(@RequestParam(value="id") Long id);
+    UserDTO findById(@RequestParam(value = "id") Long id);
 }

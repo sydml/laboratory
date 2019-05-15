@@ -25,16 +25,16 @@ public class AspectTestController {
     @RequestMapping(value = "/say", method = RequestMethod.GET)
     @ResponseBody
     @Permission
-    public void say(@RequestParam(value="name") String name,@RequestParam(value="content") String content){
+    public void say(@RequestParam(value = "name") String name, @RequestParam(value = "content") String content) {
         long id = Thread.currentThread().getId();
-        System.out.println("say:"+id);
-        System.out.println(name+ ":"  + content);
+        System.out.println("say:" + id);
+        System.out.println(name + ":" + content);
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public void testRequestAndResponse(HttpServletRequest request, HttpServletResponse response) throws IOException {
         long id = Thread.currentThread().getId();
-        System.out.println("testRequestAndResponse:"+id);
+        System.out.println("testRequestAndResponse:" + id);
         ServletInputStream inputStream = request.getInputStream();
         String string = StreamUtil.getString(inputStream);
         response.getWriter().write(string);
@@ -42,17 +42,18 @@ public class AspectTestController {
 
     @RequestMapping(value = "/test1", method = RequestMethod.GET)
     @CrossOrigin
-    public void test1(){
+    public void test1() {
         long id = Thread.currentThread().getId();
         user2Service.test1();
-        System.out.println("test1:"+id);
+        System.out.println("test1:" + id);
 
     }
+
     @RequestMapping(value = "/test2", method = RequestMethod.GET)
     @ResponseBody
-    public void test2(){
+    public void test2() {
         long id = Thread.currentThread().getId();
-        System.out.println("test2:"+id);
+        System.out.println("test2:" + id);
     }
 
 }

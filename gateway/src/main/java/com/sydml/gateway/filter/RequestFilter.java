@@ -16,6 +16,7 @@ import reactor.core.publisher.Mono;
  */
 public class RequestFilter implements GatewayFilter, Ordered {
     private static final Logger LOGGER = LoggerFactory.getLogger(RequestFilter.class);
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         return chain.filter(exchange).then(Mono.fromRunnable(() -> {

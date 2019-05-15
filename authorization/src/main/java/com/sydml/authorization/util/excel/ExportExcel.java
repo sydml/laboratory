@@ -23,6 +23,7 @@ import java.util.*;
  */
 public class ExportExcel {
     private static final Logger LOGGER = LoggerFactory.getLogger(ExportExcel.class);
+
     public void export(HttpServletResponse response, String fileName, String filePath, List<Map<String, Object>> resultList) {
         response.reset();
         response.setContentType("application/octet-stream");
@@ -107,16 +108,17 @@ public class ExportExcel {
     /**
      * formatDate 方法会在原来的时间上再加相应的时差，返回数据不准确
      * 此方法修正formate的错误，
-     * @param instantStr  “2019-03-15T05:09:37.377Z”字符串
-     * @param format 格式化字符串
+     *
+     * @param instantStr “2019-03-15T05:09:37.377Z”字符串
+     * @param format     格式化字符串
      * @return
      */
-    public String formatCompanyDate(String instantStr,  String format, ZoneId zoneId) {
+    public String formatCompanyDate(String instantStr, String format, ZoneId zoneId) {
         if (null == instantStr) {
             return null;
         }
-        LocalDateTime date = LocalDateTime.parse(instantStr, DateTimeFormatter.ofPattern( "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
-        Instant systemInstant=date.atZone(zoneId).toInstant();
+        LocalDateTime date = LocalDateTime.parse(instantStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+        Instant systemInstant = date.atZone(zoneId).toInstant();
         return LocalDateTime.ofInstant(systemInstant, zoneId).format(DateTimeFormatter.ofPattern(format));
     }
 
@@ -143,7 +145,8 @@ public class ExportExcel {
                     //表头信息
                     cell.setCellValue(property.getValue());
                 } else {
-                    cell.setCellValue(contents.get(i - 1).get(CastUtil.castInt(property.getKey())) == null ? null : contents.get(i - 1).get(CastUtil.castInt(property.getKey())).toString());
+                    cell.setCellValue(contents.get(i - 1).get(CastUtil.castInt(property.getKey())) == null ? null :
+                            contents.get(i - 1).get(CastUtil.castInt(property.getKey())).toString());
                 }
             }
         }

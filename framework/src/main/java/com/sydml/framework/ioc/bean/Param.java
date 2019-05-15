@@ -11,7 +11,7 @@ import java.util.Map;
  * 时间： 22:14
  */
 public class Param {
-    private Map<String,Object> paramMap;
+    private Map<String, Object> paramMap;
 
     public Param(Map<String, Object> paramMap) {
         this.paramMap = paramMap;
@@ -19,6 +19,7 @@ public class Param {
 
     /**
      * 根据参数名获取long型参数值
+     *
      * @param name
      * @return
      */
@@ -33,7 +34,7 @@ public class Param {
         return paramMap;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return CollectionUtil.isEmpty(paramMap);
     }
 }

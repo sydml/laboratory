@@ -48,11 +48,13 @@ public class BeanConvertUtils {
         Optional.ofNullable(clazz.getSuperclass()).ifPresent(addSuperclassFields(result));
         return result;
     }
+
     private static Consumer<Class> addSuperclassFields(List<Field> result) {
         return superClass -> {
             List<Field> superclassFields = getFields(superClass);
             List<String> resultNames = result.stream().map(Field::getName).collect(Collectors.toList());
-            List<Field> validSuperclassFields = superclassFields.stream().filter(superclassField -> !resultNames.contains(superclassField.getName())).collect(Collectors.toList());
+            List<Field> validSuperclassFields =
+                    superclassFields.stream().filter(superclassField -> !resultNames.contains(superclassField.getName())).collect(Collectors.toList());
             result.addAll(validSuperclassFields);
         };
     }

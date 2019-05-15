@@ -16,17 +16,16 @@ public class ResultMap extends HashMap {
     public Object put(Object key, Object value) {
         if (key instanceof String) {
             String newKey = StringUtil.underlineToCamel((String) key);
-            if(value instanceof Timestamp){
+            if (value instanceof Timestamp) {
                 value = ((Timestamp) value).toLocalDateTime();
             } else if (value instanceof Date) {
                 value = ((Date) value).toLocalDate();
             }
             return super.put(newKey, value);
-        }else{
+        } else {
             return super.put(key, value);
         }
     }
-
 
 
     public static void main(String[] args) {

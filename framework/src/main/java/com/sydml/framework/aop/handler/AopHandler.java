@@ -47,14 +47,14 @@ public final class AopHandler {
         return targetClassSet;
     }
 
-    private static Map<Class<?>,Set<Class<?>>> createProxyMap() throws Exception {
+    private static Map<Class<?>, Set<Class<?>>> createProxyMap() throws Exception {
         Map<Class<?>, Set<Class<?>>> proxyMap = new HashMap<Class<?>, Set<Class<?>>>();
         addAspectProxy(proxyMap);
         addTransactionProxy(proxyMap);
         return proxyMap;
     }
 
-    private static Map<Class<?>, List<Proxy>> createTargetMap(Map<Class<?>, Set<Class<?>>> proxyMap) throws Exception{
+    private static Map<Class<?>, List<Proxy>> createTargetMap(Map<Class<?>, Set<Class<?>>> proxyMap) throws Exception {
         Map<Class<?>, List<Proxy>> targetMap = new HashMap<Class<?>, List<Proxy>>();
         for (Map.Entry<Class<?>, Set<Class<?>>> proxyEntity : proxyMap.entrySet()) {
             Class<?> proxyClass = proxyEntity.getKey();
@@ -63,7 +63,7 @@ public final class AopHandler {
                 Proxy proxy = (Proxy) proxyClass.newInstance();
                 if (targetMap.containsKey(targetClass)) {
                     targetMap.get(targetClass).add(proxy);
-                }else{
+                } else {
                     List<Proxy> proxyList = new ArrayList<Proxy>();
                     proxyList.add(proxy);
                     targetMap.put(targetClass, proxyList);

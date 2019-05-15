@@ -19,7 +19,7 @@ public class User1ServiceImpl implements IUser1Service {
     private User1Repository user1Repository;
 
     @Override
-    @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     public void save(User1 user) {
         user1Repository.save(user);
     }

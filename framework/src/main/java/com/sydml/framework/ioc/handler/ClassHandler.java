@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
  * @date 2019/3/10 0010
  */
 public final class ClassHandler {
-    public static  Set<Class<?>> CLASS_SET;
+    public static Set<Class<?>> CLASS_SET;
 
-    static{
+    static {
         String basePackage = ConfigHandler.getBasePackages();
         CLASS_SET = ClassUtil.getClassSet(basePackage);
     }
 
-    public static Set<Class<?>> getClassSet(){
+    public static Set<Class<?>> getClassSet() {
         return CLASS_SET;
     }
 
@@ -67,9 +67,10 @@ public final class ClassHandler {
 
     /**
      * 获取所有的bean类
+     *
      * @return
      */
-    public static Set<Class<?>> getBeanClassSet(){
+    public static Set<Class<?>> getBeanClassSet() {
         Set<Class<?>> beanClassSet = new HashSet<>();
         beanClassSet.addAll(getControllerClassSet());
         beanClassSet.addAll(getServiceClassSet());
@@ -79,6 +80,7 @@ public final class ClassHandler {
 
     /**
      * 接口实现类有多个的处理
+     *
      * @param beanField
      * @param beanFieldClass
      * @return
@@ -86,14 +88,18 @@ public final class ClassHandler {
     public static Class<?> getImplementClass(Field beanField, Class<?> beanFieldClass) {
 
         //所有实现类
-        List<Class<?>> implementClassList = ClassHandler.getClassSet().stream().filter(it -> beanFieldClass.isAssignableFrom(it) && !beanFieldClass.equals(it)).collect(Collectors.toList());
+        List<Class<?>> implementClassList =
+                ClassHandler.getClassSet().stream().filter(it -> beanFieldClass.isAssignableFrom(it) && !beanFieldClass.equals(it)).collect(Collectors.toList());
         //如果只有一个实现类,返回实现类
         if (implementClassList.size() == 1) {
             return implementClassList.get(0);
         }
         // 实现类和类名小写的映射
-//        Map<Class<?>, String> implementClassNameMap = implementClassList.stream().distinct().collect(Collectors.toMap(Function.identity(), it -> it.getSimpleName().toLowerCase()));
-        Map<String, Class<?>> implementClassNameMap = implementClassList.stream().distinct().collect(Collectors.toMap(it -> it.getSimpleName().toLowerCase(), Function.identity()));
+//        Map<Class<?>, String> implementClassNameMap = implementClassList.stream().distinct().collect(Collectors.toMap(Function.identity
+//        (), it -> it.getSimpleName().toLowerCase()));
+        Map<String, Class<?>> implementClassNameMap =
+                implementClassList.stream().distinct().collect(Collectors.toMap(it -> it.getSimpleName().toLowerCase(),
+                        Function.identity()));
 
         // 优先按照字段上Autowired注解写的名字获取，默认为类名首字母小写
         Annotation[] fieldAnnotations = beanField.getDeclaredAnnotations();

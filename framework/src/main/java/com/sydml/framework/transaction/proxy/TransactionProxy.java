@@ -18,8 +18,8 @@ public class TransactionProxy implements Proxy {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TransactionProxy.class);
 
-    private static final ThreadLocal<Boolean> FLAG_HOLDER = new ThreadLocal<Boolean>(){
-        protected Boolean initialValue(){
+    private static final ThreadLocal<Boolean> FLAG_HOLDER = new ThreadLocal<Boolean>() {
+        protected Boolean initialValue() {
             return false;
         }
     };
@@ -43,10 +43,10 @@ public class TransactionProxy implements Proxy {
                 DatabaseHandler.rollbackTransaction();
                 LOGGER.debug("rollback transaction");
                 throw e;
-            }finally {
+            } finally {
                 FLAG_HOLDER.remove();
             }
-        }else {
+        } else {
             result = proxyChain.doProxyChain();
         }
         return result;

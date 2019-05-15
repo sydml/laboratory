@@ -43,7 +43,8 @@ public final class SpecificationBuilder {
         List<Field> declaredFields = ClassUtil.getClassInfo(conditionClass).getFields();
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>(declaredFields.size());
-            Nullable.of(declaredFields).ifPresent(fields -> fields.stream().filter(checkFiledAccess()).forEach(fieldParse(root, predicates, cb, condition)));
+            Nullable.of(declaredFields).ifPresent(fields -> fields.stream().filter(checkFiledAccess()).forEach(fieldParse(root,
+                    predicates, cb, condition)));
             return cb.and(predicates.toArray(new Predicate[predicates.size()]));
         };
     }
@@ -58,14 +59,16 @@ public final class SpecificationBuilder {
                 field.setAccessible(true);
                 //优先从Name注解上取自定义名称
                 String fieldName = field.isAnnotationPresent(Name.class) ? field.getAnnotation(Name.class).value() : field.getName();
-                Nullable.of(field.get(condition)).ifPresent(fieldObject -> appendPredicate(root, predicates, field, fieldName, fieldObject, cb));
+                Nullable.of(field.get(condition)).ifPresent(fieldObject -> appendPredicate(root, predicates, field, fieldName,
+                        fieldObject, cb));
             } catch (IllegalAccessException e) {
                 LOGGER.error("SpecificationBuilder buildSpecification fieldParse error", e);
             }
         };
     }
 
-    private static void appendPredicate(Root root, List<Predicate> predicates, Field field, String fieldName, Object fieldObject, CriteriaBuilder cb) {
+    private static void appendPredicate(Root root, List<Predicate> predicates, Field field, String fieldName, Object fieldObject,
+                                        CriteriaBuilder cb) {
         //字段如果为集合类型，做In操作
         if (Collection.class.isAssignableFrom(field.getType())) {
             collectionHandler(root, predicates, field, fieldName, (Collection) fieldObject, cb);
@@ -94,7 +97,8 @@ public final class SpecificationBuilder {
         }
     }
 
-    private static void collectionHandler(Root root, List<Predicate> predicates, Field field, String fieldName, Collection<?> fieldObject, CriteriaBuilder cb) {
+    private static void collectionHandler(Root root, List<Predicate> predicates, Field field, String fieldName, Collection<?> fieldObject
+            , CriteriaBuilder cb) {
         if (CollectionUtils.isNotEmpty(fieldObject)) {
             if (field.isAnnotationPresent(Join.class)) {
                 Join join = field.getAnnotation(Join.class);
@@ -123,7 +127,8 @@ public final class SpecificationBuilder {
         }
     }
 
-    private static void likeHandler(Root root, List<Predicate> predicates, Field field, String fieldName, Object fieldObject, CriteriaBuilder cb) {
+    private static void likeHandler(Root root, List<Predicate> predicates, Field field, String fieldName, Object fieldObject,
+                                    CriteriaBuilder cb) {
         Like like = field.getAnnotation(Like.class);
         String location = like.location();
         if (Like.AROUND.equals(location)) {

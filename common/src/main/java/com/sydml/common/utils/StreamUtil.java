@@ -30,7 +30,7 @@ public final class StreamUtil {
                 sb.append("\r\n");
             }
         } catch (Exception e) {
-            LOGGER.error("StreamUtil get String failure",e);
+            LOGGER.error("StreamUtil get String failure", e);
             throw new RuntimeException(e);
         }
         return sb.toString();
@@ -50,7 +50,7 @@ public final class StreamUtil {
         } catch (Exception e) {
             LOGGER.error("copy steam failure", e);
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             try {
                 inputStream.close();
                 outputStream.close();

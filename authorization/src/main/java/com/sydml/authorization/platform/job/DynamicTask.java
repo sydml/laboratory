@@ -32,9 +32,9 @@ public class DynamicTask {
 
     private ScheduledFuture<?> future;
 
-    private int taskSchedulerCorePoolSize=50;
+    private int taskSchedulerCorePoolSize = 50;
 
-    static boolean isinitialized=false;
+    static boolean isinitialized = false;
 
     @Bean
     public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
@@ -43,7 +43,7 @@ public class DynamicTask {
         threadPoolTaskScheduler.setThreadNamePrefix("DynamicTask-scheduledTask-");
         // 需要实例化线程
         threadPoolTaskScheduler.initialize();
-        isinitialized=true;
+        isinitialized = true;
         threadPoolTaskScheduler.setWaitForTasksToCompleteOnShutdown(true);
         threadPoolTaskScheduler.setAwaitTerminationSeconds(60);
         return threadPoolTaskScheduler;
@@ -51,6 +51,7 @@ public class DynamicTask {
 
     /**
      * scheduledMap内存存放任务，然后根据key指定停止
+     *
      * @return
      */
     public String stopCron(String taskName) {
@@ -59,7 +60,7 @@ public class DynamicTask {
             scheduledFuture.cancel(true);
             System.out.println("DynamicTask.stopCron()");
             return "stopCron";
-        }else{
+        } else {
             return "stopCron failure";
         }
     }

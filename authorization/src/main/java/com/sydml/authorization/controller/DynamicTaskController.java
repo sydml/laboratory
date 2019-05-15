@@ -20,10 +20,11 @@ public class DynamicTaskController {
 
     @Autowired
     private DynamicTask dynamicTask;
+
     @GetMapping("set-cron")
     public void setCron(String cron) {
         DynamicJob job = new DynamicJob("job-0");
-        dynamicScheduled.addTask(job,cron);
+        dynamicScheduled.addTask(job, cron);
     }
 
     @GetMapping("stop-cron")

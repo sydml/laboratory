@@ -121,7 +121,8 @@ public final class ClassUtil {
     }
 
     private static void addFileClass(Set<Class<?>> classSet, String packagePath, String packageName) {
-        File[] files = new File(packagePath).listFiles(file -> file.isFile() && file.getName().endsWith(CLASS) && !file.getName().contains($) || file.isDirectory());
+        File[] files =
+                new File(packagePath).listFiles(file -> file.isFile() && file.getName().endsWith(CLASS) && !file.getName().contains($) || file.isDirectory());
         StringBuilder stringBuilder = new StringBuilder();
         if (ArrayUtil.isEmpty(files)) {
             return;

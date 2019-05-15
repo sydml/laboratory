@@ -19,7 +19,6 @@ import java.util.Set;
  * 和com.sydml.authorization.platform.job.DynamicTask功能类似,个人喜欢DynamicTask
  * 支持动态新增和停止任务
  *
- *
  * @author Liuym
  * @date 2019/4/4 0004
  */
@@ -59,12 +58,13 @@ public class DynamicScheduled implements SchedulingConfigurer {
     /**
      * 停止指定task,这里停止的意义不大，实际业务中如果停止定时任务，要做回滚操作，不如执行完毕，错误的数据进行修复
      * 任务应该有详细的记录
+     *
      * @param taskName
      */
     public void stopTask(String taskName) {
 //        Set<ScheduledTask> tasks = registrar.getScheduledTasks(); 获取的是一个不可变集合,无法删除
         for (ScheduledTask scheduledTask : scheduledTasks) {
-            DynamicJob job = (DynamicJob)scheduledTask.getTask().getRunnable();
+            DynamicJob job = (DynamicJob) scheduledTask.getTask().getRunnable();
             if (job.getName().equals(taskName)) {
                 scheduledTask.cancel();
                 scheduledTasks.remove(scheduledTask);
@@ -78,8 +78,7 @@ public class DynamicScheduled implements SchedulingConfigurer {
 
                 scheduledTasks = (Set<ScheduledTask>) ReflectionUtil.getProperty(registrar, "scheduledTasks");
                 registrar.getScheduledTasks();
-            }
-            catch (NoSuchFieldException e) {
+            } catch (NoSuchFieldException e) {
                 throw new SchedulingException("not found scheduledFutures field.");
             }
         }

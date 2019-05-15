@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * @author Liuym
  * @date 2019/3/25 0025
  */
-public class UserDTO implements Serializable{
+public class UserDTO implements Serializable {
 
     private static final long serialVersionUID = -509696714197743874L;
 

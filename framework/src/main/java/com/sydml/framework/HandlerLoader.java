@@ -13,7 +13,7 @@ import com.sydml.framework.ioc.utils.ClassUtil;
  * 时间： 22:11
  */
 public final class HandlerLoader {
-    public static void init(){
+    public static void init() {
         Class<?>[] classList = {
                 ClassHandler.class,
                 BeanHandler.class,

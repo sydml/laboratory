@@ -11,12 +11,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TransactionApplicationTests {
-	@Autowired
-	private ApplicationContext applicationContext;
-	@Test
-	public void contextLoads() {
-		User1ServiceImpl bean = applicationContext.getBean(User1ServiceImpl.class);
-		System.out.println();
-	}
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    @Test
+    public void contextLoads() {
+        User1ServiceImpl bean = applicationContext.getBean(User1ServiceImpl.class);
+        System.out.println();
+    }
 
 }

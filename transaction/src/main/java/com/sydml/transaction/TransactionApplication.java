@@ -21,24 +21,24 @@ import org.springframework.web.client.RestTemplate;
 @EnableSwagger2Doc
 public class TransactionApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TransactionApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TransactionApplication.class, args);
+    }
 
-	@Bean
-	public ServletRegistrationBean getServlet() {
-		HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
-		ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
-		registrationBean.setLoadOnStartup(1); // 系统启动时加载顺序
-		registrationBean.addUrlMappings("/hystrix.stream");// 路径
-		registrationBean.setName("HystrixMetricsStreamServlet");
-		return registrationBean;
-	}
+    @Bean
+    public ServletRegistrationBean getServlet() {
+        HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
+        registrationBean.setLoadOnStartup(1); // 系统启动时加载顺序
+        registrationBean.addUrlMappings("/hystrix.stream");// 路径
+        registrationBean.setName("HystrixMetricsStreamServlet");
+        return registrationBean;
+    }
 
 
-	@Bean
-	@LoadBalanced
-	RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+    @Bean
+    @LoadBalanced
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 }

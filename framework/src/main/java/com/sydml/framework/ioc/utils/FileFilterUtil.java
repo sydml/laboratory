@@ -9,7 +9,7 @@ import java.io.FileFilter;
  */
 public final class FileFilterUtil {
 
-    public static FileFilter getClassFileFilter(){
+    public static FileFilter getClassFileFilter() {
         return new FileFilter() {
             @Override
             public boolean accept(File file) {

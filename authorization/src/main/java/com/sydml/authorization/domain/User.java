@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "user")
-public class User{
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +21,10 @@ public class User{
 
     private String password;
 
-    @Column(name ="create_time")
+    @Column(name = "create_time")
     private LocalDateTime createTime;
 
-    @Column(name ="modify_time")
+    @Column(name = "modify_time")
     private LocalDateTime modifyTime;
 
     private Status status;

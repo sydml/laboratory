@@ -16,10 +16,11 @@ import java.util.List;
 public class DBRepository {
     /**
      * update
+     *
      * @param sql
      * @param params
      */
-    public static void update(String sql,List<Object> params) {
+    public static void update(String sql, List<Object> params) {
         PreparedStatement st;
         ResultSet rs = null;
         DatabaseHandler.beginTransaction();
@@ -40,6 +41,7 @@ public class DBRepository {
 
     /**
      * query
+     *
      * @param sql
      * @param params
      * @param rsh
@@ -54,13 +56,13 @@ public class DBRepository {
         try {
             st = connection.prepareStatement(sql);
             for (int i = 0; i < params.size(); i++) {
-                st.setObject(i+1 , params.get(i));
+                st.setObject(i + 1, params.get(i));
             }
             rs = st.executeQuery();
             return rsh.handle(rs);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             DatabaseHandler.commitTransaction();
         }
 

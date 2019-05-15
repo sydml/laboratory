@@ -11,7 +11,7 @@ import com.sydml.framework.ioc.annotation.ResponseBody;
 @Controller
 public class MyTestController {
 
-    @RequestMapping(value ="get:/test")
+    @RequestMapping(value = "get:/test")
     @ResponseBody
     public String test() {
         return "hahaha";

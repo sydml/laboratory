@@ -53,7 +53,7 @@ public final class ClassUtil {
                         addClass(classSet, packagePath, packageName);
                     } else if ("jar".equals(protocol)) {
                         JarURLConnection jarURLConnection = (JarURLConnection) url.openConnection();
-                        addJarClass(classSet, jarURLConnection,basePackagePath);
+                        addJarClass(classSet, jarURLConnection, basePackagePath);
                     }
                 }
             }
@@ -74,7 +74,7 @@ public final class ClassUtil {
                     String jarEntryName = jarEntry.getName();
                     if (jarEntryName.startsWith(basePackagePath) && jarEntryName.endsWith(".class") && !jarEntryName.contains("$")) {
                         String className = jarEntryName.substring(0, jarEntryName.lastIndexOf(".")).replaceAll("/", ".");
-                        doAddClass(classSet,className);
+                        doAddClass(classSet, className);
                     }
                 }
             }

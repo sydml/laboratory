@@ -16,15 +16,16 @@ public class CGLibDynamicProxy implements MethodInterceptor {
 
     private static CGLibDynamicProxy CGLIB_PROXY = null;
 
-    private CGLibDynamicProxy() {}
+    private CGLibDynamicProxy() {
+    }
 
     public static CGLibDynamicProxy getCgLibProxy() {
-        return CGLIB_PROXY ==null? new CGLibDynamicProxy():CGLIB_PROXY;
+        return CGLIB_PROXY == null ? new CGLibDynamicProxy() : CGLIB_PROXY;
     }
 
     @SuppressWarnings("unchecked")
     public <T> T getProxy(Class<T> cls) {
-        return (T) Enhancer.create(cls,this);
+        return (T) Enhancer.create(cls, this);
     }
 
     @Override
@@ -34,6 +35,7 @@ public class CGLibDynamicProxy implements MethodInterceptor {
         after();
         return result;
     }
+
     private void before() {
         System.out.println("调用前");
     }

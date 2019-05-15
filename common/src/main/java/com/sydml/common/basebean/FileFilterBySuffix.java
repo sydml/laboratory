@@ -7,7 +7,7 @@ import java.io.FileFilter;
  * @author Liuym
  * @date 2019/3/22 0022
  */
-public class FileFilterBySuffix implements FileFilter{
+public class FileFilterBySuffix implements FileFilter {
 
     private String suffix;
 

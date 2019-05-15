@@ -11,7 +11,7 @@ import java.sql.SQLException;
  * @author Liuym
  * @date 2019/3/20 0020
  */
-public class BeanHandler implements ResultSetHandler{
+public class BeanHandler implements ResultSetHandler {
 
     private Class<?> clazz;
 
@@ -28,7 +28,7 @@ public class BeanHandler implements ResultSetHandler{
             Object bean = clazz.newInstance();
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
-            for (int i = 0; i <columnCount ; i++) {
+            for (int i = 0; i < columnCount; i++) {
                 String columnName = metaData.getColumnName(i + 1);
                 Object columnData = rs.getObject(i + 1);
                 Field field = clazz.getDeclaredField(columnName);

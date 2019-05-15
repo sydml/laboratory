@@ -48,22 +48,22 @@ public class RedisReentrantLock {
             refs.put(key, refCnt);
             return true;
 
-        }else{
+        } else {
             refs.remove(key);
             return tryUnlock(key);
         }
     }
 
     private boolean tryLock(String key) {
-        return jedis.set(key, "", "nx", "ex", 5L) !=null;
+        return jedis.set(key, "", "nx", "ex", 5L) != null;
     }
 
     private boolean tryUnlock(String key) {
-        return jedis.del(key)>0;
+        return jedis.del(key) > 0;
     }
 
-    private Map<String, Integer> currentLocks(){
-        Map<String,Integer> refs = lockers.get();
+    private Map<String, Integer> currentLocks() {
+        Map<String, Integer> refs = lockers.get();
         if (refs != null) {
             return refs;
         }

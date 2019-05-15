@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  * 有些情况拿到的beanFactory是null，特别是在应用第三方框架时，dubbo中遇到过，这里不使用
  * DefaultListableBeanFactory beanFactory = (DefaultListableBeanFactory) getApplicationContext().getParentBeanFactory();
+ *
  * @author Liuym
  * @date 2019/4/8 0008
  */
@@ -70,18 +71,20 @@ public class DynamicBeanAware implements ApplicationContextAware {
      * 非是单例模式的
      * 根据obj的类型、创建一个新的bean、添加到Spring容器中
      * 可以有重复的bean，取值的时只能通过obj.getClass().getName()获得Bean而不能通过类型获得Bean
+     *
      * @param object
      */
     public void autoPrototypeBean(Object object) {
         DefaultListableBeanFactory beanFactory = getBeanFactory();
         BeanDefinition beanDefinition = new GenericBeanDefinition();
         beanDefinition.setBeanClassName(object.getClass().getName());
-        beanFactory.registerBeanDefinition(object.getClass().getName(),beanDefinition);
+        beanFactory.registerBeanDefinition(object.getClass().getName(), beanDefinition);
     }
 
 
     /**
      * 单利模式注入bean
+     *
      * @param object
      */
     public void autowareSingletonBean(Object object) {
@@ -93,11 +96,10 @@ public class DynamicBeanAware implements ApplicationContextAware {
     }
 
     /**
-     *
      * 用于存储Spring容器管理之外的Bean
      */
     public DefaultListableBeanFactory getBeanFactory() {
-        DefaultListableBeanFactory beanFactory = (DefaultListableBeanFactory)applicationContext.getAutowireCapableBeanFactory();
+        DefaultListableBeanFactory beanFactory = (DefaultListableBeanFactory) applicationContext.getAutowireCapableBeanFactory();
         return beanFactory;
     }
 }

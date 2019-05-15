@@ -8,8 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = "com.sydml.advancedredis")
 public class AdvancedRedisApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AdvancedRedisApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AdvancedRedisApplication.class, args);
+    }
 
 }

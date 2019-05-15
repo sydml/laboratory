@@ -12,15 +12,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class RedissionStartApplicationTests {
 
-	@Autowired
-	private RedissonClient redissonClient;
-	@Test
-	public void contextLoads() {
-		RLock anyLock = redissonClient.getLock("anyLock");
-		anyLock.lock();
-		RLock faiLock = redissonClient.getFairLock("faiLock");
-		faiLock.lock();
+    @Autowired
+    private RedissonClient redissonClient;
 
-	}
+    @Test
+    public void contextLoads() {
+        RLock anyLock = redissonClient.getLock("anyLock");
+        anyLock.lock();
+        RLock faiLock = redissonClient.getFairLock("faiLock");
+        faiLock.lock();
+
+    }
 
 }

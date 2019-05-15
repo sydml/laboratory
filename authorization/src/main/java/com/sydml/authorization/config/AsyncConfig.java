@@ -9,9 +9,9 @@ import java.util.concurrent.Executor;
 
 /**
  * 配置定时任务的多线程
- * @EnableAsync 支持异步
  *
  * @author Liuym
+ * @EnableAsync 支持异步
  * @date 2019/4/4 0004
  */
 @Configuration
@@ -20,6 +20,7 @@ public class AsyncConfig {
     private int corePoolSize = 10;
     private int maxPoolSize = 200;
     private int queueCapacity = 10;
+
     @Bean
     public Executor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();

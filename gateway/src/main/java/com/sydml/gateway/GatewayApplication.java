@@ -21,7 +21,7 @@ public class GatewayApplication {
                 .route(r -> r.path("/api-mybatis/**")
                         .filters(f -> f.stripPrefix(1))
                         .uri("lb://MYBATIS"))
-                        .build();
+                .build();
     }
 
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @date 2019/3/25 0025
  */
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 
     @Autowired
     private UserRepository userRepository;

@@ -7,6 +7,7 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+
 /**
  * Created by Yuming-Liu
  * 日期： 2019-03-07
@@ -17,13 +18,13 @@ import redis.clients.jedis.JedisPoolConfig;
 @Configuration
 public class JedisConfig {
     @Value("${spring.redis.host}")
-    private  String host;
+    private String host;
     @Value("${spring.redis.password}")
-    private  String password;
+    private String password;
     @Value("${spring.redis.port}")
-    private  int port;
+    private int port;
     @Value("${spring.redis.timeout}")
-    private  int timeout;
+    private int timeout;
     @Value("${spring.redis.jedis.pool.max-idle}")
     private int maxIdle;
     @Value("${spring.redis.jedis.pool.max-wait}")

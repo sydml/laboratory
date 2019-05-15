@@ -25,11 +25,12 @@ public class View {
         model.put(key, value);
         return this;
     }
-    public String getPath(){
+
+    public String getPath() {
         return path;
     }
 
-    public Map<String, Object> getModel(){
+    public Map<String, Object> getModel() {
         return model;
     }
 }

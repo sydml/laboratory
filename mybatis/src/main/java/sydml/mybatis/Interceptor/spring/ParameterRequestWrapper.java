@@ -14,7 +14,7 @@ import java.util.Map;
 public class ParameterRequestWrapper extends HttpServletRequestWrapper {
     private Map<String, String[]> params = new HashMap<>();
 
-    public ParameterRequestWrapper(HttpServletRequest request) throws IOException{
+    public ParameterRequestWrapper(HttpServletRequest request) throws IOException {
         super(request);
         this.params.putAll(request.getParameterMap());
     }

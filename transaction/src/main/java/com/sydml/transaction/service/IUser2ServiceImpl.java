@@ -23,7 +23,7 @@ import java.util.List;
  * @date 2019/3/13 0013
  */
 @Service
-public class IUser2ServiceImpl implements IUser2Service,ApplicationContextAware {
+public class IUser2ServiceImpl implements IUser2Service, ApplicationContextAware {
 
     @Autowired
     private User2Repository user2Repository;
@@ -34,7 +34,7 @@ public class IUser2ServiceImpl implements IUser2Service,ApplicationContextAware 
     private User1Repository user1Repository;
 
     @Override
-    @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRES_NEW)
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRES_NEW)
     public void save(User2 user) {
         user2Repository.save(user);
     }
@@ -45,7 +45,7 @@ public class IUser2ServiceImpl implements IUser2Service,ApplicationContextAware 
     }
 
     @Override
-    @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     public void batchSave(List<User2> user2List) {
         for (User2 user2 : user2List) {
             save(user2);
@@ -53,17 +53,17 @@ public class IUser2ServiceImpl implements IUser2Service,ApplicationContextAware 
     }
 
     @Override
-    @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
-    public void saveUserWithTrx(User2 user2){
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+    public void saveUserWithTrx(User2 user2) {
         IUser2ServiceImpl user2Service = applicationContext.getBean(IUser2ServiceImpl.class);
         user2Service.saveUser2AndUser1(user2);
         throw new RuntimeException("trx error");
     }
 
     @Override
-    @Transactional(isolation= Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     @PrintLog(type = PrintLog.OR)
-    public User2 saveUserWithoutTrx(User2 user2){
+    public User2 saveUserWithoutTrx(User2 user2) {
         User1 user1 = new User1();
         user1.setName("user1WithOutTrx");
         user1Repository.save(user1);
@@ -78,7 +78,7 @@ public class IUser2ServiceImpl implements IUser2Service,ApplicationContextAware 
     private User1 saveUser2AndUser1(User2 user2) {
         User1 user1 = new User1();
         user1.setName("saveUser2AndUser1");
-       return user1Repository.save(user1);
+        return user1Repository.save(user1);
     }
 
     @Override
@@ -88,8 +88,8 @@ public class IUser2ServiceImpl implements IUser2Service,ApplicationContextAware 
     }
 
     @Override
-    public void test1(){
+    public void test1() {
         long id = Thread.currentThread().getId();
-        System.out.println("service.test1:"+id);
+        System.out.println("service.test1:" + id);
     }
 }

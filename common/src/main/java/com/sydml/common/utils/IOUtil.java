@@ -70,7 +70,7 @@ public class IOUtil {
 
     }
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         File dir = new File("D:\\stariboss\\feature1");
 
         //明确一个过滤器。
@@ -80,11 +80,11 @@ public class IOUtil {
         //符合过滤器条件的文件有很多，最好先存储起来，然后在进行操作。
         List<File> list = new ArrayList<>();
         //获取指定文件清单。
-        getFileList(dir,filter,list);
+        getFileList(dir, filter, list);
         System.out.println(list.size());
 
-        File destFile = new File(dir,"javaList.txt");
-        write2File(list,destFile);
+        File destFile = new File(dir, "javaList.txt");
+        write2File(list, destFile);
     }
 
 }

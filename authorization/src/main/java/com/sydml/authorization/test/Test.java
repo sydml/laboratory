@@ -26,7 +26,7 @@ public class Test {
         peopleList.add(people1);
 
         List<Map<String, Object>> collect = peopleList.stream().map(BeanConvertUtils::toMap).collect(Collectors.toList());
-        peopleList.stream().map(it->new HashMap()).collect(Collectors.toList());
+        peopleList.stream().map(it -> new HashMap()).collect(Collectors.toList());
         System.out.println();
     }
 }

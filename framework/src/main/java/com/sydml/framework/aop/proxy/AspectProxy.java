@@ -15,6 +15,7 @@ public abstract class AspectProxy implements Proxy {
 
     /**
      * 代理目标对象执行代替执行method
+     *
      * @param proxyChain
      * @return
      * @throws Throwable
@@ -32,14 +33,14 @@ public abstract class AspectProxy implements Proxy {
                 before(cls, method, params);
                 result = proxyChain.doProxyChain();
                 after(cls, method, params, result);
-            }else{
+            } else {
                 result = proxyChain.doProxyChain();
             }
         } catch (Exception e) {
             LOGGER.error("proxy failure", e);
             error(cls, method, params, e);
             throw e;
-        }finally {
+        } finally {
             end();
         }
         return result;
@@ -47,25 +48,26 @@ public abstract class AspectProxy implements Proxy {
     }
 
 
-
     public void begin() {
 
     }
-    public boolean intercept(Class<?> cls, Method method, Object[] params) throws Throwable{
+
+    public boolean intercept(Class<?> cls, Method method, Object[] params) throws Throwable {
         return true;
     }
-    public void before(Class<?> cls, Method method, Object[] params)throws Throwable{
+
+    public void before(Class<?> cls, Method method, Object[] params) throws Throwable {
 
     }
 
-    public void after(Class<?> cls, Method method, Object[] params, Object result) throws Throwable{
+    public void after(Class<?> cls, Method method, Object[] params, Object result) throws Throwable {
 
     }
 
-    private void error(Class<?> cls, Method method, Object[] params, Exception e) throws Throwable{
+    private void error(Class<?> cls, Method method, Object[] params, Exception e) throws Throwable {
     }
 
-    public void end(){
+    public void end() {
 
     }
 

@@ -74,6 +74,7 @@ public class ExcelBuilder extends AbstractExcelTool {
 
     /**
      * 根据输出内容和提供的模版，构建出excel输出流；
+     *
      * @param result       数据信息，excel根据map的数量设置sheet页，
      *                     每个map对应一个sheet页，List中的第一条记录作为表头，第二条记录作为code用于填充数据
      * @param templateFile 模版信息
@@ -92,19 +93,19 @@ public class ExcelBuilder extends AbstractExcelTool {
             Map<Integer, String> titleRow = parseKeyTitle(firstSheet.getRow(0).cellIterator());
             Map<Integer, String> codeRow = parseKeyTitle(firstSheet.getRow(1).cellIterator());
             for (Map.Entry<String, List<Map<String, Object>>> entry : result.entrySet()) {
-                if(sheetIndex>=wb.getNumberOfSheets()){
-                    wb.createSheet("Sheet_"+(sheetIndex+1));
+                if (sheetIndex >= wb.getNumberOfSheets()) {
+                    wb.createSheet("Sheet_" + (sheetIndex + 1));
                 }
                 Sheet sheet = wb.getSheetAt(sheetIndex);
                 int index = 0;
                 // 设置前两行，保证国际化，和所有sheet页的公共头部一致
-                for(;index < 2;index++) {
+                for (; index < 2; index++) {
                     createTitle(sheet, index, index == 0 ? titleRow : codeRow, entry.getValue().get(index));
                 }
                 // 将list中的第二条数据作为以后数据填充的参考，补充到keyMap中去.
                 Map<Integer, String> keyMap = parseKeyTitle(sheet.getRow(1).cellIterator());
 
-                for (int i=2;i<entry.getValue().size();i++) {
+                for (int i = 2; i < entry.getValue().size(); i++) {
                     Map<String, Object> map = entry.getValue().get(i);
                     Row row = sheet.createRow(index++);
                     keyMap.keySet().stream().forEach(columnIndex -> {
@@ -131,7 +132,7 @@ public class ExcelBuilder extends AbstractExcelTool {
     }
 
     private void createTitle(Sheet sheet, int index, Map<Integer, String> oldTitle, Map<String, Object> newTitle) {
-        if(null!=sheet.getRow(index)){
+        if (null != sheet.getRow(index)) {
             sheet.removeRow(sheet.getRow(index));
         }
         Row row = sheet.createRow(index);
@@ -142,7 +143,7 @@ public class ExcelBuilder extends AbstractExcelTool {
         for (String key : newTitle.keySet()) {
             row.createCell(column++).setCellValue(newTitle.get(key).toString());
         }
-        if(index==1){
+        if (index == 1) {
             row.setZeroHeight(true);
         }
     }

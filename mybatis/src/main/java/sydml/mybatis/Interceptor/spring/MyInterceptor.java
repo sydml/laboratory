@@ -21,7 +21,7 @@ import java.util.Map;
  * @date 2019/3/23 0023
  */
 @Component
-public class MyInterceptor implements HandlerInterceptor{
+public class MyInterceptor implements HandlerInterceptor {
 
 
     @Override
@@ -39,7 +39,7 @@ public class MyInterceptor implements HandlerInterceptor{
         return true;
     }
 
-    private boolean writeFailResponse(HttpServletResponse response) throws IOException{
+    private boolean writeFailResponse(HttpServletResponse response) throws IOException {
         Map<String, Object> map = new HashMap<>();
         map.put("status", 500);
         map.put("message", "登录失效，请登录");
@@ -50,7 +50,6 @@ public class MyInterceptor implements HandlerInterceptor{
         response.getWriter().write(s);
         return false;
     }
-
 
 
     @Override

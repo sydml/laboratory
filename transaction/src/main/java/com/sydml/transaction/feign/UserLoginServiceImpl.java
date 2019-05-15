@@ -2,17 +2,17 @@ package com.sydml.transaction.feign;
 
 import com.sydml.common.api.dto.LoginInfo;
 import com.sydml.common.api.dto.UserDTO;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Liuym
  * @date 2019/5/12 0012
  */
-@Service
+@Component
 public class UserLoginServiceImpl implements IUserLoginService {
     @Override
-    public void login(LoginInfo loginInfo) {
-        throw new RuntimeException("mybatis FeignClient find none server");
+    public String login(LoginInfo loginInfo) {
+        return "mybatis FeignClient find none server";
     }
 
     @Override

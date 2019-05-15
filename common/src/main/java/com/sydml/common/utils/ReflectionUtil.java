@@ -90,7 +90,8 @@ public final class ReflectionUtil {
         return superClass -> {
             List<Field> superclassFields = getFields(superClass);
             List<String> resultNames = result.stream().map(Field::getName).collect(Collectors.toList());
-            List<Field> validSuperclassFields = superclassFields.stream().filter(superclassField -> !resultNames.contains(superclassField.getName())).collect(Collectors.toList());
+            List<Field> validSuperclassFields =
+                    superclassFields.stream().filter(superclassField -> !resultNames.contains(superclassField.getName())).collect(Collectors.toList());
             result.addAll(validSuperclassFields);
         };
     }

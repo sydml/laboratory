@@ -24,15 +24,15 @@ public class ConfigHandler {
         return PropsUtil.getString(CONFIG_PROPS, ConfigConstant.JDBC_USERNAME);
     }
 
-     public static String getJdbcPassword() {
+    public static String getJdbcPassword() {
         return PropsUtil.getString(CONFIG_PROPS, ConfigConstant.JDBC_PASSWORD);
     }
 
-     public static String getJspPath() {
+    public static String getJspPath() {
         return PropsUtil.getString(CONFIG_PROPS, ConfigConstant.JSP_PATH);
     }
 
-     public static String getAssetPath() {
+    public static String getAssetPath() {
         return PropsUtil.getString(CONFIG_PROPS, ConfigConstant.ASSET_PATH);
     }
 

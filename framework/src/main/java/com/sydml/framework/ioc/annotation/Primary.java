@@ -7,6 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * 对于实现接口的bean如果有此注解有限获取
+ *
  * @author Liuym
  * @date 2019/3/10 0010
  */

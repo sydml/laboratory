@@ -37,9 +37,9 @@ public class RedisDelayQueue<T> implements IRedisDelayQueue<T> {
         try {
             //放入延迟队列,5s后再重试
             jedis.zadd(id, System.currentTimeMillis() + 5000, s);
-        }catch (Exception e){
+        } catch (Exception e) {
             LOGGER.warn("redis.delay.queue.send.message.error");
-        }finally {
+        } finally {
             jedis.close();
         }
     }
@@ -76,7 +76,7 @@ public class RedisDelayQueue<T> implements IRedisDelayQueue<T> {
                 }
             } catch (Exception e) {
                 LOGGER.error("redis.delay.queue.getMessage.error");
-            }finally {
+            } finally {
                 if (jedis != null) {
                     jedis.close();
                 }
@@ -87,6 +87,7 @@ public class RedisDelayQueue<T> implements IRedisDelayQueue<T> {
 
     /**
      * 模拟业务代码处理消息
+     *
      * @param msg
      */
     public void handleMsg(T msg) {
@@ -95,16 +96,17 @@ public class RedisDelayQueue<T> implements IRedisDelayQueue<T> {
 
     /**
      * 简单的生产者消费者测试该消息队列
+     *
      * @param queueKey
      */
-    public  void testRedisQueue(String queueKey) {
+    public void testRedisQueue(String queueKey) {
         Thread producer = new Thread((() -> {
             for (int i = 0; i < 10; i++) {
-                sendMessage(queueKey,(T)("codehole" + i));
+                sendMessage(queueKey, (T) ("codehole" + i));
             }
         }));
 
-        Thread consumer = new Thread(()->{
+        Thread consumer = new Thread(() -> {
             RedisMessage<T> message = getMessage(queueKey);
             handleMsg(message.getContent());
         });

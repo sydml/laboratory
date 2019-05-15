@@ -50,7 +50,7 @@ public final class StringUtil {
             for (String s : split) {
                 stringBuilder.append(s.substring(0, 1).toUpperCase()).append(s.substring(1));
             }
-        }else{
+        } else {
             stringBuilder.append(key);
         }
         String result = stringBuilder.replace(0, 1, stringBuilder.substring(0, 1).toLowerCase()).toString();

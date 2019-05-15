@@ -14,8 +14,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableHystrixDashboard
 public class AuthorizationApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AuthorizationApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AuthorizationApplication.class, args);
+    }
 
 }

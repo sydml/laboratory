@@ -83,17 +83,17 @@ public class DispatcherServlet extends HttpServlet {
             Object result;
             if (param.isEmpty()) {
                 result = ReflectionUtil.invokeMethod(controllerBean, actionMethod);
-            }else {
+            } else {
                 result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
             }
-            if(result instanceof View){
+            if (result instanceof View) {
                 // 如果返回结果是View类型的进行视图跳转
                 View view = (View) result;
                 String path = view.getPath();
                 if (StringUtil.isNotEmpty(path)) {
                     if (path.startsWith("/")) {
                         response.sendRedirect(request.getContextPath() + path);
-                    }else{
+                    } else {
                         Map<String, Object> model = view.getModel();
                         for (Map.Entry<String, Object> entry : model.entrySet()) {
                             request.setAttribute(entry.getKey(), entry.getValue());
@@ -101,14 +101,14 @@ public class DispatcherServlet extends HttpServlet {
                         request.getRequestDispatcher(ConfigHandler.getJspPath() + path).forward(request, response);
                     }
                 }
-            }else if(result instanceof Data){
+            } else if (result instanceof Data) {
                 // 如果返回结果是Data类型的直接通过流返回json
                 Data data = (Data) result;
                 Object model = data.getModel();
                 if (model != null) {
                     printResult(response, model);
                 }
-            }else if (actionMethod.isAnnotationPresent(ResponseBody.class)) {
+            } else if (actionMethod.isAnnotationPresent(ResponseBody.class)) {
                 printResult(response, result);
             }
 

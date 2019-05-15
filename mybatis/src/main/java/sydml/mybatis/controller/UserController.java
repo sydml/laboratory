@@ -91,7 +91,7 @@ public class UserController {
 
     @GetMapping("find-by-id")
     @ResponseBody
-    public UserDTO findById(@RequestParam(value="id") Long id) {
+    public UserDTO findById(@RequestParam(value = "id") Long id) {
         UserDTO userDTO = loginServie.findById(id);
         return userDTO;
     }

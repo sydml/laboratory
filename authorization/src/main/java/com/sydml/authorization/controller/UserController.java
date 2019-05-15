@@ -39,12 +39,12 @@ public class UserController {
     }
 
     @GetMapping("find-by-id")
-    public UserDTO findById(@RequestParam(value="id") Long id) {
-      return userService.findById(id);
+    public UserDTO findById(@RequestParam(value = "id") Long id) {
+        return userService.findById(id);
     }
 
     @GetMapping("find-by-username")
-    public UserDTO findByUsername(@RequestParam(value="username") String username) {
+    public UserDTO findByUsername(@RequestParam(value = "username") String username) {
         return userService.findByUsername(username);
     }
 }

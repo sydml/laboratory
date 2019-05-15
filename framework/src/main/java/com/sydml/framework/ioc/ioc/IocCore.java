@@ -12,6 +12,7 @@ import java.util.Map;
 
 /**
  * IOC 容器
+ *
  * @author Liuym
  * @date 2019/3/10 0010
  */
@@ -37,8 +38,8 @@ public final class IocCore {
                                     //DI 反射进行依赖注入
                                     ReflectionUtil.setField(beanInstance, beanField, beanFieldInstance);
                                 }
-                            }else{
-                               // 非接口实现类直接注入
+                            } else {
+                                // 非接口实现类直接注入
                                 Object beanFieldInstance = beanMap.get(beanFieldClass);
                                 if (beanFieldInstance != null) {
                                     //DI 反射进行依赖注入
@@ -51,7 +52,6 @@ public final class IocCore {
             }
         }
     }
-
 
 
     public static void main(String[] args) {

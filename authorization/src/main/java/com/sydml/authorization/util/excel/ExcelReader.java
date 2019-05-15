@@ -189,6 +189,7 @@ public class ExcelReader {
         }
         return strCell;
     }
+
     private synchronized static String formatDate(Date date) {
         return defaultDateFormat.format(date);
     }
@@ -233,14 +234,14 @@ public class ExcelReader {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        File destFile = new File(dir,"test.xls");
-        try{
+        File destFile = new File(dir, "test.xls");
+        try {
             fos = new FileOutputStream(destFile);
             bufos = new BufferedOutputStream(fos);
             workbook.write(bufos);
             bufos.flush();
-        }finally{
-            if(bufos!=null){
+        } finally {
+            if (bufos != null) {
                 try {
                     fos.close();
                 } catch (IOException e) {

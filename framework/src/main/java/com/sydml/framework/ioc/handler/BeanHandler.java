@@ -12,6 +12,7 @@ import java.util.Set;
  */
 public final class BeanHandler {
     private static final Map<Class<?>, Object> BEAN_MAP = new HashMap<>();
+
     static {
         Set<Class<?>> beanClassSet = ClassHandler.getBeanClassSet();
         for (Class<?> beanClass : beanClassSet) {
@@ -22,9 +23,10 @@ public final class BeanHandler {
 
     /**
      * 获取bean 映射
-      * @return
+     *
+     * @return
      */
-    public static Map<Class<?>, Object> getBeanMap(){
+    public static Map<Class<?>, Object> getBeanMap() {
         return BEAN_MAP;
     }
 
@@ -35,7 +37,7 @@ public final class BeanHandler {
         if (!BEAN_MAP.containsKey(cls)) {
             throw new RuntimeException("can not find bean by class:" + cls);
         }
-      return (T)BEAN_MAP.get(cls);
+        return (T) BEAN_MAP.get(cls);
     }
 
     /**

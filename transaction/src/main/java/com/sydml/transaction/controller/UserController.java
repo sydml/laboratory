@@ -65,9 +65,9 @@ public class UserController {
         user2Service.testBaseTypeRequest("a", 1, true, 2L, user1);
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public void login(@RequestBody(required = true) LoginInfo loginInfo) {
-        userLoginService.login(loginInfo);
+    public String login(@RequestBody(required = true) LoginInfo loginInfo) {
+        return userLoginService.login(loginInfo);
     }
 }

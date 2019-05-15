@@ -22,14 +22,17 @@ public final class CommonQueryConditionExecutor {
         if (condition.getPage() != PageCondition.PAGE_DEFAULTVALUE) {
             return StringUtil.isEmpty(condition.getDirection())
                     ? specificationExecutor.findAll(specification, PageRequest.of(condition.getPage() - 1, condition.getLimit()))
-                    : specificationExecutor.findAll(specification, PageRequest.of(condition.getPage() - 1, condition.getLimit(), buildSortByCondition(condition)));
+                    : specificationExecutor.findAll(specification, PageRequest.of(condition.getPage() - 1, condition.getLimit(),
+                    buildSortByCondition(condition)));
         } else {
-            List<T> tasks = StringUtil.isEmpty(condition.getDirection()) ? specificationExecutor.findAll(specification) : specificationExecutor.findAll(specification, buildSortByCondition(condition));
+            List<T> tasks = StringUtil.isEmpty(condition.getDirection()) ? specificationExecutor.findAll(specification) :
+                    specificationExecutor.findAll(specification, buildSortByCondition(condition));
             return new PageImpl<>(tasks);
         }
     }
 
     public static Sort buildSortByCondition(SortCondition sortCondition) {
-        return new Sort(Sort.Direction.fromString(sortCondition.getDirection()), Nullable.of(sortCondition.getSortField()).orElse("createInstant"));
+        return new Sort(Sort.Direction.fromString(sortCondition.getDirection()), Nullable.of(sortCondition.getSortField()).orElse(
+                "createInstant"));
     }
 }

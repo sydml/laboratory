@@ -13,7 +13,7 @@ import javax.ws.rs.QueryParam;
 /**
  * 分页参数
  */
-public class PageCondition extends SortCondition{
+public class PageCondition extends SortCondition {
 
     @Page
     public static final Integer PAGE_DEFAULTVALUE = -1;

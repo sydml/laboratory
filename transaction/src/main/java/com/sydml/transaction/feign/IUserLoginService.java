@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Liuym
  * @date 2019/5/12 0012
  */
-@FeignClient(value = "authorization")
+@FeignClient(value = "authorization", fallback = UserLoginServiceImpl.class)
 public interface IUserLoginService {
     @PostMapping(value = "user/login")
-    void login(LoginInfo loginInfo);
+    String login(LoginInfo loginInfo);
 
     @RequestMapping(value = "user/find-by-id", method = RequestMethod.GET)
     UserDTO findById(@RequestParam("id") Long id);

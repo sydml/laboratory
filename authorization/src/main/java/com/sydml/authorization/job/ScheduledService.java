@@ -6,10 +6,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
+ * @author Liuym
  * @Async 开启支持异步方式
  * 存在局限如果 @Scheduled(cron = "0/5 * * * * *")内按照参数动态传入则无法处理
- *
- * @author Liuym
  * @date 2019/4/4 0004
  */
 @Component

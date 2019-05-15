@@ -31,7 +31,7 @@ public class ControllerHandler {
                         if (method.isAnnotationPresent(RequestMapping.class)) {
                             RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
                             String mapping = requestMapping.value();
-                            if(mapping.matches("\\w+:/\\w*")){
+                            if (mapping.matches("\\w+:/\\w*")) {
                                 String[] array = mapping.split(":");
                                 if (ArrayUtil.isNotEmpty(array) && array.length == 2) {
                                     String requestMethod = array[0];

@@ -50,7 +50,7 @@ public class PrintLogAspect {
             Object target = joinPoint.getTarget();
             String className = target.getClass().getSimpleName();
             Parameter[] parameters = method.getParameters();
-            logContent.append(className + POINT + method.getName() + POINT + PARAM_IS + SPLIT +"{");
+            logContent.append(className + POINT + method.getName() + POINT + PARAM_IS + SPLIT + "{");
             if (args.length == 0) {
                 return;
             }
@@ -58,7 +58,7 @@ public class PrintLogAspect {
                 if (parameters[i].getType().isPrimitive() || isWrapClass(parameters[i].getType()) || parameters[i].getType() == String.class) {
                     logContent.append(MARKS + parameters[i].getName() + MARKS + SPLIT + MARKS + args[i] + MARKS + COMMA);
                 } else {
-                    logContent.append(args[i].getClass().getSimpleName()+ SPLIT +JsonUtil.encodeJson(args[i]));
+                    logContent.append(args[i].getClass().getSimpleName() + SPLIT + JsonUtil.encodeJson(args[i]));
                 }
             }
             logContent.append("}");

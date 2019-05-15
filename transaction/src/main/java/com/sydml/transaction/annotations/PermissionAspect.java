@@ -38,7 +38,7 @@ public class PermissionAspect {
             System.out.println(parameter);
         }
         Class<?>[] parameterTypes = method.getParameterTypes();
-        int i= 0;
+        int i = 0;
         for (Class<?> parameterType : parameterTypes) {
             // 遇到接口会失败
             Object o = ReflectionUtil.newInstance(parameterType);

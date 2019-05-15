@@ -22,6 +22,7 @@ public class Myfilter implements Filter {
 
     @Autowired
     private UserMapper userMapper;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 

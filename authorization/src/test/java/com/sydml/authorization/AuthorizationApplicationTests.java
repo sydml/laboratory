@@ -18,30 +18,31 @@ import java.util.concurrent.TimeUnit;
 @SpringBootTest
 public class AuthorizationApplicationTests {
 
-	@Autowired
-	private RedisTemplate redisTemplate;
-	@Test
-	public void contextLoads() {
-		redisTemplate.opsForHash().putIfAbsent("hash", "test", "value");
-		redisTemplate.opsForHash().putIfAbsent("hash", "test01", "value01");
-		redisTemplate.opsForList().rightPush("lsit", "java");
-	}
+    @Autowired
+    private RedisTemplate redisTemplate;
 
-	@Test
-	public void testHash(){
-		redisTemplate.opsForHash().put("expire", "test", "test01");
-		redisTemplate.expire("expire", 50, TimeUnit.SECONDS);
-	}
+    @Test
+    public void contextLoads() {
+        redisTemplate.opsForHash().putIfAbsent("hash", "test", "value");
+        redisTemplate.opsForHash().putIfAbsent("hash", "test01", "value01");
+        redisTemplate.opsForList().rightPush("lsit", "java");
+    }
 
-	@Test
-	public void testString(){
-		redisTemplate.opsForValue().set("string", "value");
-		redisTemplate.opsForValue().set("string", "value1");
-	}
+    @Test
+    public void testHash() {
+        redisTemplate.opsForHash().put("expire", "test", "test01");
+        redisTemplate.expire("expire", 50, TimeUnit.SECONDS);
+    }
 
-	@Test
-	public void testLua(){
+    @Test
+    public void testString() {
+        redisTemplate.opsForValue().set("string", "value");
+        redisTemplate.opsForValue().set("string", "value1");
+    }
 
-	}
+    @Test
+    public void testLua() {
+
+    }
 
 }

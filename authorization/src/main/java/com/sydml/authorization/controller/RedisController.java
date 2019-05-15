@@ -22,11 +22,12 @@ import java.util.List;
 public class RedisController {
     @Autowired
     private RedisTemplate redisTemplate;
+
     @GetMapping("test")
-    public void testLua(){
+    public void testLua() {
         InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("lua/string.lua");
         String lua = StreamUtil.getString(inputStream);
-        RedisScript redisScript = RedisScript.of(lua,Long.class);
+        RedisScript redisScript = RedisScript.of(lua, Long.class);
         List<String> list = new ArrayList<>();
         list.add("test");
 //        redisTemplate.execute((session)->{})

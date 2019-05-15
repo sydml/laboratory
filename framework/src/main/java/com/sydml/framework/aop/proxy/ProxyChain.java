@@ -27,7 +27,8 @@ public class ProxyChain {
 
     private int proxyIndex = 0;
 
-    public ProxyChain(Class<?> targetClass, Object targetObject, Method targetMethod, MethodProxy methodProxy, Object[] methodParams, List<Proxy> proxyList) {
+    public ProxyChain(Class<?> targetClass, Object targetObject, Method targetMethod, MethodProxy methodProxy, Object[] methodParams,
+                      List<Proxy> proxyList) {
         this.targetClass = targetClass;
         this.targetObject = targetObject;
         this.targetMethod = targetMethod;
@@ -52,12 +53,12 @@ public class ProxyChain {
         return methodParams;
     }
 
-    public Object doProxyChain() throws Throwable{
+    public Object doProxyChain() throws Throwable {
         Object methodResutl;
         if (proxyIndex < proxyList.size()) {
             methodResutl = proxyList.get(proxyIndex++).doProxy(this);
-        }else{
-            methodResutl = methodProxy.invokeSuper(targetObject,methodParams);
+        } else {
+            methodResutl = methodProxy.invokeSuper(targetObject, methodParams);
         }
         return methodResutl;
     }
