@@ -3,10 +3,12 @@ package com.sydml.authorization.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.internet.MimeMessage;
 import java.io.File;
@@ -37,7 +39,7 @@ public class MailServiceImpl implements IMailService {
     }
 
     @Override
-    public void sendAttachmentsMail(String to, String subject, String content) {
+    public void sendAttachmentsMail(String to, String subject, String content, MultipartFile inputSource) {
         String [] fileArray={"C:\\Users\\Administrator\\Desktop\\项目修改截图\\feature1\\未占用费用清单修改.PNG","C:\\Users\\Administrator\\Desktop\\mjxy_cloud2.0.zip"};
         MimeMessage message=mailSender.createMimeMessage();
         try {
@@ -52,7 +54,8 @@ public class MailServiceImpl implements IMailService {
                 for (int i = 0; i < fileArray.length; i++) {
                     //添加附件
                     file=new FileSystemResource(fileArray[i]);
-                    helper.addAttachment(fileArray[i].substring(fileArray[i].lastIndexOf(File.separator)), file);
+//                    helper.addAttachment(fileArray[i].substring(fileArray[i].lastIndexOf(File.separator)), file);
+                    helper.addAttachment(inputSource.getOriginalFilename(), inputSource);
                 }
             }
             mailSender.send(message);

@@ -1,5 +1,8 @@
 package com.sydml.authorization.service;
 
+import org.springframework.core.io.InputStreamSource;
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  * @author Liuym
  * @date 2019/5/28 0028
@@ -19,5 +22,5 @@ public interface IMailService {
      * @param subject
      * @param content
      */
-    void sendAttachmentsMail(String to, String subject, String content);
+    void sendAttachmentsMail(String to, String subject, String content, MultipartFile inputSource);
 }

@@ -26,6 +26,6 @@ public class MailController {
 
     @GetMapping("send-attach")
     public void sendAttachmentsMail(@RequestParam("to") String to, @RequestParam("subject") String subject, @RequestParam("content") String content) {
-        mailService.sendAttachmentsMail(to, subject, content);
+        mailService.sendAttachmentsMail(to, subject, content,null);
     }
 }
