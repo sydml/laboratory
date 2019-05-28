@@ -6,6 +6,7 @@ import com.sydml.authorization.platform.job.DynamicTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -34,25 +35,14 @@ public class DynamicTaskController {
 
 
     @RequestMapping("start")
-    public void startDynamicJob(String cron) {
-        DynamicJob job = new DynamicJob("dynamic-job");
-        dynamicTask.startCron(job, cron);
-    }
-
-    @GetMapping("start-another-job")
-    public void startDynamicJob1(String cron) {
-        DynamicJob job = new DynamicJob("dynamic-another-job");
+    public void startDynamicJob(@RequestParam("cron") String cron, @RequestParam("jobName") String jobName) {
+        DynamicJob job = new DynamicJob(jobName);
         dynamicTask.startCron(job, cron);
     }
 
     @RequestMapping("stop")
-    public void stopDynamicJob() {
-        dynamicTask.stopCron("dynamic-job");
-    }
-
-    @RequestMapping("stop-another")
-    public void stopAnotherDynamicJob() {
-        dynamicTask.stopCron("dynamic-another-job");
+    public void stopDynamicJob(@RequestParam("jobName") String jobName) {
+        dynamicTask.stopCron(jobName);
     }
 
 }

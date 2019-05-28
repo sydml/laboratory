@@ -17,6 +17,6 @@ public class DynamicJob implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("dynamic job run" + name);
+        System.out.println("dynamic job run:" + name);
     }
 }
