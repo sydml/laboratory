@@ -74,5 +74,15 @@ spring:
         min-idle: 0
     password: ''
     port: 6379
+  mail:
+    host: smtp.163.com
+    username: your username
+    password: your password
+    default-encoding: UTF-8
+    protocol: smtp
+    properties:
+      mail.smtp.socketFactory.fallback: true
+      mail.smtp.starttls.enable: true
+
 jobs:
   cron: 0/5 * * * * *

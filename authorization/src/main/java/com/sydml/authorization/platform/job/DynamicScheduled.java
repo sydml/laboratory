@@ -4,6 +4,7 @@ import com.sydml.authorization.job.domain.DynamicJob;
 import com.sydml.common.utils.ReflectionUtil;
 import org.springframework.scheduling.SchedulingException;
 import org.springframework.scheduling.Trigger;
+import org.springframework.scheduling.TriggerContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTask;
@@ -40,8 +41,8 @@ public class DynamicScheduled implements SchedulingConfigurer {
     public void addTask(DynamicJob task, String cron) {
         Trigger trigger = triggerContext -> {
             //任务触发，可修改任务的执行周期.
-            CronTrigger CronTrigger = new CronTrigger(cron);
-            Date nextExec = CronTrigger.nextExecutionTime(triggerContext);
+            CronTrigger cronTrigger = new CronTrigger(cron);
+            Date nextExec = cronTrigger.nextExecutionTime(triggerContext);
             return nextExec;
         };
         if (task != null) {
