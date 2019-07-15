@@ -1,13 +1,15 @@
 package com.sydml.authorization.service;
 
 import com.sydml.authorization.domain.User;
-import com.sydml.common.api.dto.UserDTO;
 import com.sydml.authorization.repository.UserRepository;
 import com.sydml.authorization.util.BeanMapper;
+import com.sydml.common.api.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * @author Liuym
@@ -22,6 +24,22 @@ public class UserService implements IUserService {
     @Autowired
     private BeanMapper beanMapper;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+   private void streamRead() {
+        jdbcTemplate.query(con -> {
+            PreparedStatement preparedStatement = con.prepareStatement("select * from table", ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            preparedStatement.setFetchSize(Integer.MIN_VALUE);
+            preparedStatement.setFetchDirection(ResultSet.FETCH_FORWARD);
+            return preparedStatement;
+        }, rs -> {
+            while (rs.next()) {
+                System.err.println(rs.getString("id"));
+            }
+        });
+
+    }
 
     @Override
 //    @RequestMapping(value="user/find-by-username",method = RequestMethod.GET)
