@@ -1,4 +1,5 @@
 package com.sydml.common.utils;
+
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -15,11 +16,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.crypto.Cipher;
+
 /**
  * @Author: Liuyuming
  * @Date: 2019/9/18 10:24
  */
-public class RSACoder extends Coder{
+public class RSACoder extends Coder {
     public static final String KEY_ALGORITHM = "RSA";
     public static final String SIGNATURE_ALGORITHM = "MD5withRSA";
 
@@ -29,11 +31,8 @@ public class RSACoder extends Coder{
     /**
      * 用私钥对信息生成数字签名
      *
-     * @param data
-     *            加密数据
-     * @param privateKey
-     *            私钥
-     *
+     * @param data       加密数据
+     * @param privateKey 私钥
      * @return
      * @throws Exception
      */
@@ -61,16 +60,11 @@ public class RSACoder extends Coder{
     /**
      * 校验数字签名
      *
-     * @param data
-     *            加密数据
-     * @param publicKey
-     *            公钥
-     * @param sign
-     *            数字签名
-     *
+     * @param data      加密数据
+     * @param publicKey 公钥
+     * @param sign      数字签名
      * @return 校验成功返回true 失败返回false
      * @throws Exception
-     *
      */
     public static boolean verify(byte[] data, String publicKey, String sign)
             throws Exception {

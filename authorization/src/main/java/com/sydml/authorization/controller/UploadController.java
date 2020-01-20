@@ -37,7 +37,7 @@ public class UploadController {
             redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
             return "redirect:uploadStatus";
         }
-        mailService.sendAttachmentsMail("1817113127@qq.com","upload test","test content", file);
+        mailService.sendAttachmentsMail("1817113127@qq.com", "upload test", "test content", file);
 
         try {
             // Get the file and save it somewhere

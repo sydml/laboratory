@@ -27,7 +27,7 @@ public class UserService implements IUserService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-   private void streamRead() {
+    private void streamRead() {
         jdbcTemplate.query(con -> {
             PreparedStatement preparedStatement = con.prepareStatement("select * from table", ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
             preparedStatement.setFetchSize(Integer.MIN_VALUE);

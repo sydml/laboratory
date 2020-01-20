@@ -1,4 +1,5 @@
 package com.sydml.common.utils;
+
 import java.security.MessageDigest;
 
 import javax.crypto.KeyGenerator;
@@ -8,6 +9,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
+
 /**
  * @Author: Liuyuming
  * @Date: 2019/9/18 10:27

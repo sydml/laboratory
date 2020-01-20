@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface IMailService {
     /**
      * 简单邮件发送，不带附件
+     *
      * @param to
      * @param subject
      * @param content
@@ -18,6 +19,7 @@ public interface IMailService {
 
     /**
      * 发送带附件的邮件，可以增加多个附件
+     *
      * @param to
      * @param subject
      * @param content

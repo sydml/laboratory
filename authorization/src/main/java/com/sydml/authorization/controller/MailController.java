@@ -20,12 +20,12 @@ public class MailController {
     @GetMapping("send")
     public void sendMail(@RequestParam("to") String to, @RequestParam("subject") String subject, @RequestParam("content") String content) {
         for (int i = 0; i < 10; i++) {
-            mailService.sendSimpleMail(to, subject+i, content+i);
+            mailService.sendSimpleMail(to, subject + i, content + i);
         }
     }
 
     @GetMapping("send-attach")
     public void sendAttachmentsMail(@RequestParam("to") String to, @RequestParam("subject") String subject, @RequestParam("content") String content) {
-        mailService.sendAttachmentsMail(to, subject, content,null);
+        mailService.sendAttachmentsMail(to, subject, content, null);
     }
 }

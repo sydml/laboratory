@@ -24,6 +24,13 @@
         <module>advanced-redis</module>
         <module>framework</module>
         <module>framework-test</module>
+        <module>zipkin</module>
+        <module>redission-start</module>
+        <module>mybatis</module>
+        <module>gateway</module>
+        <module>transaction</module>
+        <module>eureka</module>
+        <module>authorization</module>
     </modules>
 
 

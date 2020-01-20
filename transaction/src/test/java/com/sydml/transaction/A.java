@@ -5,7 +5,7 @@ package com.sydml.transaction;
  * @date 2019/5/27 0027
  */
 public class A {
-    public void say(){
+    public void say() {
         System.out.println("A say");
     }
 }

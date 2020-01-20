@@ -40,27 +40,27 @@ public class MailServiceImpl implements IMailService {
 
     @Override
     public void sendAttachmentsMail(String to, String subject, String content, MultipartFile inputSource) {
-        String [] fileArray={"C:\\Users\\Administrator\\Desktop\\项目修改截图\\feature1\\未占用费用清单修改.PNG","C:\\Users\\Administrator\\Desktop\\mjxy_cloud2.0.zip"};
-        MimeMessage message=mailSender.createMimeMessage();
+        String[] fileArray = {"C:\\Users\\Administrator\\Desktop\\项目修改截图\\feature1\\未占用费用清单修改.PNG", "C:\\Users\\Administrator\\Desktop\\mjxy_cloud2.0.zip"};
+        MimeMessage message = mailSender.createMimeMessage();
         try {
-            MimeMessageHelper helper=new MimeMessageHelper(message,true);
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(sender);
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(content);
             //验证文件数据是否为空
-            if(null != fileArray){
-                FileSystemResource file=null;
+            if (null != fileArray) {
+                FileSystemResource file = null;
                 for (int i = 0; i < fileArray.length; i++) {
                     //添加附件
-                    file=new FileSystemResource(fileArray[i]);
+                    file = new FileSystemResource(fileArray[i]);
 //                    helper.addAttachment(fileArray[i].substring(fileArray[i].lastIndexOf(File.separator)), file);
                     helper.addAttachment(inputSource.getOriginalFilename(), inputSource);
                 }
             }
             mailSender.send(message);
             System.out.println("带附件的邮件发送成功");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("发送带附件的邮件失败");
         }
