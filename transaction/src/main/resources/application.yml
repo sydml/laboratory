@@ -28,9 +28,9 @@ spring:
       time-between-eviction-runs-millis: 60000
       valid-connection-checker-class-name: com.alibaba.druid.pool.vendor.MSSQLValidConnectionChecker
       validation-query: SELECT 1 FROM DUAL
-    password: 1234
+    password: root
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1:3306/laboratory?characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://127.0.0.1:3306/bigdata?characterEncoding=UTF-8&serverTimezone=GMT%2B8
     username: root
   http:
     encoding:
