@@ -118,7 +118,8 @@ public class BigDataAnalysis {
         for (int i = 0; i < threads; i++) {
             pool.execute(() -> {
                 try {
-                    save(sqlText, cyclicBarrier, count);
+                    batchSave(sqlText, count);
+                    cyclicBarrier.await();
                 } catch (BrokenBarrierException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -130,10 +131,6 @@ public class BigDataAnalysis {
         System.out.println("总耗时：" + (System.currentTimeMillis() - start));
     }
 
-    private void save(String sqlText, CyclicBarrier cyclicBarrier, int count) throws BrokenBarrierException, InterruptedException {
-        batchSave(sqlText, count);
-        cyclicBarrier.await();
-    }
 
     @Test
     public void batchSaveTest() {
@@ -197,7 +194,8 @@ public class BigDataAnalysis {
         for (int i = 0; i < threads; i++) {
             pool.execute(() -> {
                 try {
-                    saveByConPool(sqlText, cyclicBarrier, count);
+                    batchSaveFromConPool(sqlText, count);
+                    cyclicBarrier.await();
                 } catch (BrokenBarrierException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -209,11 +207,6 @@ public class BigDataAnalysis {
         System.out.println("总耗时：" + (System.currentTimeMillis() - start));
     }
 
-    private void saveByConPool(String sqlText, CyclicBarrier cyclicBarrier, int count) throws BrokenBarrierException, InterruptedException {
-        batchSaveFromConPool(sqlText, count);
-        cyclicBarrier.await();
-    }
-    
     private void batchSaveFromConPool(String sqlText, int count) {
         long start = System.currentTimeMillis();
         Random random = new Random();
@@ -329,6 +322,13 @@ public class BigDataAnalysis {
         preparedStatement.setFetchSize(Integer.MIN_VALUE);
         long start = System.currentTimeMillis();
         ResultSet resultSet = preparedStatement.executeQuery();
+        /*ResultSetMetaData metaData = resultSet.getMetaData();
+        int columnCount = metaData.getColumnCount();
+        for (int i = 1; i <= columnCount; i++) {
+            String columnName = metaData.getColumnName(i);
+            System.out.println(columnName);
+
+        }*/
         System.out.println("流式查询耗时："+ (System.currentTimeMillis()-start));
         User[] users = new User[10];
         List<Tuple<Field, String, Class>> tuples = getTupleFields(User.class);
