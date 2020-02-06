@@ -184,14 +184,11 @@ public class BigDataAnalysis {
     @Test
     public void testByConPool() throws InterruptedException, BrokenBarrierException {
         createConnectionWithThreadPool();
-        
-        
-        int threads = conThreads;
-        int count = totalCount / threads;
-        CyclicBarrier cyclicBarrier = new CyclicBarrier(threads + 1);
+        int count = totalCount / conThreads;
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(conThreads + 1);
 
         long start = System.currentTimeMillis();
-        for (int i = 0; i < threads; i++) {
+        for (int i = 0; i < conThreads; i++) {
             pool.execute(() -> {
                 try {
                     batchSaveFromConPool(sqlText, count);
